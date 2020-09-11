@@ -1,0 +1,22 @@
+.filter-controls {
+  border: 1px solid pink;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.filter-category {
+  /* border: 1px solid red; */
+  display: block;
+  width: 25%;
+}
+
+.filter-search {
+  /* border: 1px solid red; */
+  display: block;
+  width: 25%;
+}
+
+.filter-search input {
+  width: 70%;
+}

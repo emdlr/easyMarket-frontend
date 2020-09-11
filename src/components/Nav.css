@@ -1,0 +1,12 @@
+.nav {
+  /* border: 1px solid red; */
+  text-align: right;
+}
+
+.nav-home {
+  /* border: 1px solid blue; */
+  display: block;
+  padding: 6px 0;
+  padding-right: 40px;
+  box-sizing: border-box;
+}

@@ -1,0 +1,28 @@
+.header {
+  /* display: grid;
+  grid-template-columns: 33% 34% 33%;
+  grid-template-rows: 100%;
+  background-size: cover;
+  background-position: 80% 75%;
+  background-repeat: repeat;
+  filter: brightness(120%);
+   background-image: url(http://getwallpapers.com/wallpaper/full/3/d/3/1148694-new-food-wallpaper-themes-2560x1600.jpg#.X1qvwrB5Of4.link); */
+  /* border: 1px solid blue; */
+  /* background-size: cover; */
+  /* background-position: 80% 75%; */
+  /* height: 100vh; */
+  background-color: #db0648;
+  color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.header p {
+  font-size: 60px;
+}
+
+.header-logo {
+  width: 3%;
+}
