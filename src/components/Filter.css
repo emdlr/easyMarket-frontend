@@ -5,16 +5,24 @@
   align-items: center;
 }
 
+.filter-store {
+  border: 1px solid red;
+  /* display: block; */
+  width: 25%;
+  font-size: 15px;
+}
 .filter-category {
   /* border: 1px solid red; */
-  display: block;
+  /* display: block; */
   width: 25%;
+  font-size: 15px;
 }
 
 .filter-search {
   /* border: 1px solid red; */
   display: block;
   width: 25%;
+  font-size: 15px;
 }
 
 .filter-search input {

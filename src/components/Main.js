@@ -4,7 +4,7 @@ import Options from "./Options.js";
 
 const Main = () => {
   return (
-    <div class="main">
+    <div className="main">
       <Options />
     </div>
   );
