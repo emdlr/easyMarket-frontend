@@ -10,6 +10,7 @@ class ProductSelector extends Component {
       listPreview: [],
     };
     this.tmpArray = [];
+    this.total = 0.0;
   }
 
   componentDidMount() {
@@ -54,9 +55,6 @@ class ProductSelector extends Component {
     const htmlParentNodeId = document.getElementById(e.target.id).parentNode.id;
     // const htmlParentNode = document.getElementById(e.target.id).parentNode;
     const htmlProductCost = document.getElementById(`cost${htmlParentNodeId}`);
-    const htmlProductQuantity = document.getElementById(
-      `quantity${htmlParentNodeId}`
-    );
 
     const htmlProductStatus = document.getElementById(
       `productStatus${htmlParentNodeId}`
@@ -77,8 +75,6 @@ class ProductSelector extends Component {
       } else if (htmlProductStatus.value === "Checked") {
         htmlProductStatus.value = "Unchecked";
         // htmlButtonSelect.value = "Check";
-        htmlProductCost.value = "";
-        htmlProductQuantity.value = "";
         htmlButtonSelect.classList.remove("button-product-checked");
       }
     }
@@ -104,6 +100,7 @@ class ProductSelector extends Component {
     const htmlProductStatus = document.getElementById(
       `productStatus${htmlParentNodeId}`
     );
+    const htmlTotal = document.getElementById("list-preview-total");
 
     if (htmlProductCost.value !== "") {
       tempObj["productId"] = htmlProductId.value;
@@ -114,7 +111,10 @@ class ProductSelector extends Component {
       tempObj["quantity"] = htmlProductQuantity.value;
       tempObj["cost"] = htmlProductCost.value;
       tempObj["pickedStatus"] = "True";
-
+      console.log("Product Cost value", htmlProductCost.value);
+      this.total += parseFloat(htmlProductCost.value);
+      htmlTotal.value = this.total;
+      console.log("Product Cost value", htmlTotal.value);
       this.tmpArray.push(tempObj);
       this.setState({ listPreview: this.tmpArray });
     }
@@ -125,6 +125,20 @@ class ProductSelector extends Component {
     const htmlProductId = document.getElementById(
       `productId${htmlParentNodeId}`
     );
+    const htmlProductCost = document.getElementById(`cost${htmlParentNodeId}`);
+    const htmlProductQuantity = document.getElementById(
+      `quantity${htmlParentNodeId}`
+    );
+
+    const htmlTotal = document.getElementById("list-preview-total");
+    console.log(htmlProductCost);
+
+    console.log("Product Cost value remove", this.total, htmlProductCost.value);
+
+    this.total -= htmlProductCost.value;
+    htmlTotal.value = this.total;
+    htmlProductCost.value = "";
+    htmlProductQuantity.value = "";
 
     console.log("Removign a product", this.state.listPreview);
     let updatedListPreview = this.state.listPreview.filter(
@@ -228,8 +242,8 @@ class ProductSelector extends Component {
       <div className="product-selector-container">
         <div className="product-container">{storeProducts}</div>
         <div className="list-preview-container">
-          <div className="list-preview-totals">
-            <input type="text" value="" disabled={true} />
+          <div className="list-preview-total-container">
+            <input id="list-preview-total" type="number" disabled={true} />
           </div>
           <ListPreview listPreview={this.state.listPreview} />
         </div>
