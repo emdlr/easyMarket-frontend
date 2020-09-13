@@ -19,8 +19,10 @@
   align-items: center;
 }
 
-.header p {
+.headText {
   font-size: 60px;
+  text-decoration: none;
+  color:white;
 }
 
 .header-logo {
