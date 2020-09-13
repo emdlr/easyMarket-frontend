@@ -1,0 +1,7 @@
+.list-store-container {
+  border: 1px solid blue;
+  display: block;
+  grid-column: span 3;
+  /* width: 25%; */
+  font-size: 15px;
+}

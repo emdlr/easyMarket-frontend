@@ -5,6 +5,7 @@ import Nav from "./components/Nav.js";
 import Main from "./components/Main.js";
 import Footer from "./components/Footer.js";
 import CreateList from "./components/CreateList.js";
+import ListStore from "./components/ListStore.js";
 import { Route, Switch } from "react-router-dom";
 import axios from "axios";
 
@@ -16,22 +17,21 @@ class App extends Component {
     this.state = {
       categories: [],
       stores: [],
+      listHeader: {},
       productsByStore: [],
+      currentView: "",
     }; // end state
   } // end constructor
 
   getCategories = async () => {
     const response = await axios.get(`${backendUrl}/categories`);
-    console.log("response: ", response.data.categories);
     this.setState({
       categories: response.data.categories,
     });
   };
 
   populateCategory = () => {
-    console.log("Filter props category", this.state.categories);
-
-    var ele = document.getElementById("category");
+    const ele = document.getElementById("category");
     for (var i = 0; i < this.state.categories.length; i++) {
       // POPULATE SELECT ELEMENT WITH JSON.
       ele.innerHTML =
@@ -46,15 +46,12 @@ class App extends Component {
 
   getStores = async () => {
     const response = await axios.get(`${backendUrl}/stores`);
-    console.log("response: ", response.data.stores);
     this.setState({
       stores: response.data.stores,
     });
   };
 
   populateStore = () => {
-    console.log("Filter props stores", this.state.stores);
-
     var ele = document.getElementById("store");
     for (var i = 0; i < this.state.stores.length; i++) {
       // POPULATE SELECT ELEMENT WITH JSON.
@@ -68,9 +65,70 @@ class App extends Component {
     }
   };
 
-  populateProduct = () => {
-    console.log("Getting products....");
+  getListHeader = () => {
+    // e.preventDefault();
+    const tempHeader = {};
+    // tempHeader["storeId"] = e.target.storeSelector.value;
+    // tempHeader["storeName"] =
+    //   e.target.storeSelector.options[
+    //     e.target.storeSelector.options.selectedIndex
+    //   ].text;
+    // tempHeader["listName"] = e.target.listName.value;
+    // this.setState({
+    //   listHeader: tempHeader,
+    // });
+
+    const storeHtmlElement = document.getElementById("store");
+    const listNameHtmlElement = document.getElementById("listName");
+    tempHeader["storeId"] = storeHtmlElement.value;
+    tempHeader["storeName"] =
+      storeHtmlElement.options[storeHtmlElement.selectedIndex].text;
+    tempHeader["listName"] = listNameHtmlElement.value;
+    this.setState({
+      listHeader: tempHeader,
+    });
   };
+
+  getProductsByStore = async () => {
+    console.log("Getting products....");
+    console.log("Store id....", this.state.listHeader.storeId);
+    const response = await axios.get(
+      `${backendUrl}/stores/${this.state.listHeader.storeId}/products`
+    );
+    console.log("getting products...", response.data.prices);
+    this.setState({
+      productsByStore: response.data.prices,
+    });
+  };
+
+  setView = (view) => {
+    this.setState({
+      currentView: view,
+    });
+  }; // End setView
+
+  pageView = () => {
+    switch (this.state.currentView) {
+      case "list-products":
+        return (
+          <CreateList
+            populateCategory={this.populateCategory}
+            populateProduct={this.populateProduct}
+            listHeader={this.state.listHeader}
+            getProductsByStore={this.getProductsByStore}
+            productsByStore={this.state.productsByStore}
+          />
+        );
+      default:
+        return (
+          <ListStore
+            populateStore={this.populateStore}
+            getListHeader={this.getListHeader}
+            setView={this.setView}
+          />
+        );
+    } // end switch
+  }; // end pageView
 
   async componentDidMount() {
     this.getCategories();
@@ -82,19 +140,12 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        <Nav />
+        <Nav setView={this.setView} />
         <Switch>
           <Route exact path="/">
             <Main />
           </Route>
-          <Route path="/List">
-            <CreateList
-              populateCategory={this.populateCategory}
-              populateStore={this.populateStore}
-              populateProduct={this.populateProduct}
-              productsByStore={this.state.productsByStore}
-            />
-          </Route>
+          <Route path="/CreateList">{this.pageView()}</Route>
         </Switch>
         <Footer />
       </div>

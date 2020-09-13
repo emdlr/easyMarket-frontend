@@ -20,7 +20,7 @@ const Options = () => {
         <Link to="/" className="option">
           Units
         </Link>
-        <Link className="option" to="/List">
+        <Link className="option" to="/CreateList">
           Create list
         </Link>
         <Link to="/" className="option">
