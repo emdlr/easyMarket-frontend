@@ -32,24 +32,55 @@ export default class User extends Component {
         e.preventDefault();
         let userId=e.target.value;
         let listName= e.target.innerText;
-        let indList = []
-
+        let indList = [];
         for(let i=0;i<this.state.lists.length;i++){
             if(this.state.lists[i].listName===listName)
-               indList.push({prodName:this.state.lists[i].Product.description,
+               indList.push({id:this.state.lists[i].id,prodName:this.state.lists[i].Product.description,
                                                     prodPicture:this.state.lists[i].Product.picture,
                                                     cost:this.state.lists[i].cost,
                                                     isPicked:this.state.lists[i].pickedStatus,
                                                     quantity:this.state.lists[i].quantity,
                                                     unit:this.state.lists[i].Product.Unit.description});
         }
-        console.log(indList)
         this.setState({
             isIndividual:true,
             individualList:indList,
             indListName:listName
         })
         indList=[]
+        
+    }
+    myLists = (e) => {
+        e.preventDefault();
+        this.setState({
+            isIndividual:false
+        })
+    }
+    updatePick = async (e) =>{
+        e.preventDefault();
+        let nextStatus= e.target.checked?true:false;
+        let listId = e.target.name;
+        const list = await Axios.put(`${this.props.backendUrl}/lists/${e.target.name}`,{newStatus:nextStatus});
+        let indL = this.state.individualList;
+        for(const prop in indL){
+            if(indL[prop].id==listId){
+             indL[prop].isPicked=nextStatus;
+             break;
+            }
+        }
+        let allLists =this.state.lists;
+        for(const prop in allLists){
+            if(allLists[prop].id==listId){
+                 allLists[prop].pickedStatus=nextStatus;
+                 break;
+            }
+        }
+        this.setState({
+            individualList:indL,
+            lists:allLists
+        })
+        indL=[];
+        allLists=[];
     }
     render(){
         if(!this.state.isIndividual){
@@ -65,6 +96,7 @@ export default class User extends Component {
         }else{
             return(<div>
                 <p>HELLO {`${this.state.userName.toUpperCase()}`}</p>
+                <div onClick={this.myLists}>Back to my Lists</div>
             <p>List: {this.state.indListName}</p>
                 <table>
                     <th>Picture</th>
@@ -80,7 +112,7 @@ export default class User extends Component {
                             <td>{product.quantity}</td>
                             <td>{product.unit}</td>
                             <td>${product.cost}</td>
-                            <td><input type='checkbox' value={product.pickedStatus?"checked":"unchecked"} /></td>
+                            <td><input type='checkbox' name={product.id} onClick={this.updatePick} checked={product.isPicked?true:false} /></td>
                         </tr>);
                     })}
                 </table>

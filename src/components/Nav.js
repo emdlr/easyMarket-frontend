@@ -9,8 +9,9 @@ export default class Nav extends Component {
     this.state={
       username:"",
       password:"",
-      isLoggedIn:false,
-      user:{}
+      user:{},
+      reset:false,
+      hide:false
     }
   }
   getUsername = (e) =>{
@@ -35,9 +36,9 @@ export default class Nav extends Component {
             if(response.data.user){
                 let user = {userId:response.data.user.id,userName:response.data.user.username};                                        
                 this.setState({
-                  isLoggedIn:true,
                   user:user
                 })
+                this.props.logings(response.data.user.id,true);
               }else
               alert("Log In data incorrect");
             
@@ -47,10 +48,9 @@ export default class Nav extends Component {
   logOut = (e) =>{
     e.preventDefault();
     this.setState({
-          isLoggedIn:false,
           userName:""
     })
-    window.close();
+    this.props.logings(e,false);
     window.history.forward();
     window.open("/","_self")
     
@@ -64,9 +64,7 @@ export default class Nav extends Component {
                                                 {username: this.state.username,
                                                 password:this.state.password}).then(response =>{
                 if(response.data!==400){
-                  this.setState({
-                    isLoggedIn:true
-                  })
+                  this.props.logings(response.data.user.id,true);
                 }else{
                   alert("User Already Exists");
                 }
@@ -74,8 +72,13 @@ export default class Nav extends Component {
      }
   
   }
+  goLists = (e) =>{
+    this.setState({
+      reset:!this.state.reset
+    })
+  }
   render(){
-    if(!this.state.isLoggedIn){
+    if(!this.props.isLoggedIn){
       return(
         <div className="nav">
           <input type="text" onChange={this.getUsername} className="nav-login" placeholder="Username"/>
@@ -87,8 +90,7 @@ export default class Nav extends Component {
     }else{
       return(
         <div className="nav">
-          <p>Hello {this.state.user.userName}:</p>
-          <Link to={`/user/${this.state.user.userId}`}> Goto Lists </Link>
+          <p>Hello {this.state.username}</p>
           <div className="nav-sign"onClick={this.logOut}>Log Out</div>
       </div>
       );
