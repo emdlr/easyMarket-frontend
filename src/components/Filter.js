@@ -16,8 +16,9 @@ class Filter extends Component {
     return (
       <div>
         <div className="filter-list-data">
-          <p>{this.props.listHeader.storeName}</p>
-          <p> - </p>
+          <label>Store:</label>
+          <h5>{this.props.listHeader.storeName}</h5>
+          <label>List: </label>
           <p>{this.props.listHeader.listName}</p>
         </div>
         {/* <div className="filter-controls">
