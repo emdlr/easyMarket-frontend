@@ -3,6 +3,9 @@ import "./CreateList.css";
 import Filter from "./Filter.js";
 import ProductSelector from "./ProductSelector.js";
 
+//RENDER TWO COMPONENTS:
+//Filter: A header with the store and list name
+//ProductSelector: Shows all the products by store to create the list
 const CreateList = (props) => {
   return (
     <div className="create-list-container">

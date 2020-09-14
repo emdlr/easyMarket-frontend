@@ -42,9 +42,11 @@ class ProductSelector extends Component {
       e.target.value === ""
     ) {
       // If there is not quantity: Disable button, clean related fields and remove className to return the button to the default styling
+      htmlButtonSelect.innerText = "Check";
       htmlSubmitButton.disabled = true;
       htmlCost.value = "";
       htmlProductStatus.value = "";
+
       htmlButtonSelect.classList.remove("button-product-checked");
     } else {
       // If there is quantity: Enable button and calculate cost
@@ -54,9 +56,15 @@ class ProductSelector extends Component {
   }; // End handleChange
 
   // METHOD TO HANDLE THE BUTTON BEHAVIOR
-  handleButton = (e) => {
+  handleButton = (e, origin = "product") => {
     // Get html elements for manipulation
-    const htmlParentNodeId = document.getElementById(e.target.id).parentNode.id;
+    let htmlParentNodeId = document.getElementById(e.target.id).parentNode.id;
+
+    if (origin === "preview-list") {
+      htmlParentNodeId = htmlParentNodeId.substring(
+        htmlParentNodeId.indexOf("-") + 1
+      );
+    }
     const htmlProductCost = document.getElementById(`cost${htmlParentNodeId}`);
     const htmlProductStatus = document.getElementById(
       `productStatus${htmlParentNodeId}`
@@ -131,10 +139,18 @@ class ProductSelector extends Component {
   };
 
   // METHOD TO REMIVE A PRODUCT FROM THE PREVIEW LIST
-  removeProduct(e) {
-    console.log("ORIGIN", origin);
+  removeProduct(e, origin = "product") {
     // Getting HTML elements for manipulation
-    const htmlParentNodeId = document.getElementById(e.target.id).parentNode.id;
+    let htmlParentNodeId = document.getElementById(e.target.id).parentNode.id;
+
+    if (origin === "preview-list") {
+      htmlParentNodeId = htmlParentNodeId.substring(
+        htmlParentNodeId.indexOf("-") + 1
+      );
+    }
+    console.log(htmlParentNodeId);
+
+    // const htmlParentNodeId = document.getElementById(e.target.id).parentNode.id;
     const htmlProductId = document.getElementById(
       `productId${htmlParentNodeId}`
     );
@@ -176,16 +192,17 @@ class ProductSelector extends Component {
     }
   };
 
+  // METHOD TO REOVE A PRODUCT FROM THE PREVIEW LIST TRIGGERED FROM PREVIEW LIST
+  handleProductPreview = (e) => {
+    this.handleButton(e, "preview-list");
+    this.removeProduct(e, "preview-list");
+  }; // End handleProductPreview
+
   // Method to persist the list in the database
   createCart = () => {
-    console.log("Creating list...", this.state.listPreview);
     let listArray = [];
     for (let i = 0; i < this.state.listPreview.length; i++) {
       let tmpObj = {};
-      console.log(
-        this.state.listPreview[i],
-        this.state.listPreview[i].productId
-      );
       tmpObj["productId"] = this.state.listPreview[i].productId;
       tmpObj["userId"] = this.state.listPreview[i].userId;
       tmpObj["listName"] = this.state.listPreview[i].listName;
@@ -195,25 +212,10 @@ class ProductSelector extends Component {
       listArray.push(tmpObj);
     }
     console.log(listArray);
-
-    // for (const [property, value] of entries) {
-    //   console.log(`There are ${count} ${fruit}s`)
-    // }
   };
 
   render() {
     const storeProducts = this.props.productsByStore.map((product) => {
-      console.log(
-        product.id,
-        product.storeId,
-        product.productId,
-        product.price,
-        product.Product.id,
-        product.Product.unitId,
-        product.Product.categoryId,
-        product.Product.description,
-        product.Product.picture
-      );
       return (
         <div
           key={product.id}
@@ -325,6 +327,7 @@ class ProductSelector extends Component {
             <ListPreview
               listPreview={this.state.listPreview}
               createCart={this.createCart}
+              handleProductPreview={this.handleProductPreview}
             />
           </div>
           {/* <div className="list-preview-total-container">

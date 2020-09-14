@@ -6,7 +6,11 @@ class ListPreview extends Component {
     // console.log("this.props.tmpArray", this.props.tmpArray);
     const htmlListPreview = this.props.listPreview.map((item, index) => {
       return (
-        <div className="list-preview-product-container" key={item.productId}>
+        <div
+          id={`lp-${item.productId}`}
+          className="list-preview-product-container"
+          key={item.productId}
+        >
           <input type="hidden" value={item.productId} />
           <input type="hidden" value={item.userId} />
           <input type="hidden" value={item.listName} />
@@ -30,9 +34,11 @@ class ListPreview extends Component {
             disabled={true}
           />
           <button
+            id={`lpButton-${item.productId}`}
             type="button"
             name="buttonDelete"
-            // onClick={this.handleProduct}
+            className="list-preview-delete-button"
+            onClick={this.props.handleProductPreview}
           >
             X
           </button>
@@ -52,6 +58,7 @@ class ListPreview extends Component {
             <p className="large-size">Description</p>
             <p className="small-size">Qty</p>
             <p className="small-size">Cost</p>
+            <p className="list-preview-padding2"></p>
           </div>
         </div>
         {htmlListPreview}
