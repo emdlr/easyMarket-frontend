@@ -11,9 +11,6 @@ class ProductSelector extends Component {
       listPreview: [],
     };
     this.tmpArray = [];
-<<<<<<< HEAD
-  }
-=======
     this.total = 0.0;
   }
 
@@ -339,7 +336,6 @@ class ProductSelector extends Component {
     );
   } // end render
 } // end class
->>>>>>> dfc527c47bc422d3b2a60b30b09dd61f91f862e8
 
   componentDidMount() {
     this.props.getProductsByStore();

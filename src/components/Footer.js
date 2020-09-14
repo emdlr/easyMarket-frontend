@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <div className="footer">
       <p>
-        easyMarket - Designed and Developed by Edgar Martinz and Cesar Trevino,
+        easyMarket - Designed and Developed by Edgar Martinez and Cesar Trevino,
         Mexico 2020
       </p>
     </div>

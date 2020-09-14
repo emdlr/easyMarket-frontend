@@ -24,11 +24,7 @@ const Options = (props) => {
         <Link to="/" className="option">
           Units
         </Link>
-<<<<<<< HEAD
-        <Link className="option" to="/CreateList">
-=======
         {/* <Link className="option" to="/CreateList">
->>>>>>> dfc527c47bc422d3b2a60b30b09dd61f91f862e8
           Create list
         </Link> */}
         <Link className="option" to="/SelectStore">

@@ -1,24 +1,12 @@
 .nav {
   /* border: 1px solid red; */
-<<<<<<< HEAD
-  display:flex;
-=======
   display: flex;
->>>>>>> dfc527c47bc422d3b2a60b30b09dd61f91f862e8
   flex-flow: row wrap;
   align-items: center;
   justify-content: flex-end;
 }
 
 .nav-sign {
-<<<<<<< HEAD
-  border: 1px solid blue; 
-  margin:1vh;
-  padding:0.5vh
-}
-.nav-login{
-  margin:1vh;
-=======
   border: 1px solid blue;
   margin: 1vh;
   padding: 0.5vh;
@@ -26,5 +14,4 @@
 
 .nav-login {
   margin: 1vh;
->>>>>>> dfc527c47bc422d3b2a60b30b09dd61f91f862e8
 }

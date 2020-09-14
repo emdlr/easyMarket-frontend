@@ -1,25 +1,3 @@
-<<<<<<< HEAD
-.list-preview-product-container {
-    border: 1px solid red;
-    display: flex;
-    flex-direction: row;
-    /* align-items: center; */
-    justify-content: space-around;
-    height: 15px;
-  }
-  
-  .list-preview-element-no-visible {
-    visibility: hidden;
-  }
-  
-  .medium-size {
-    width: 200px;
-  }
-  
-  .small-size {
-    width: 25px;
-  }
-=======
 .list-preview-header-control {
   display: flex;
   flex-direction: row;
@@ -127,4 +105,3 @@
 .number-field {
   text-align: right;
 }
->>>>>>> dfc527c47bc422d3b2a60b30b09dd61f91f862e8

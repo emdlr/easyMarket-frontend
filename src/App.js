@@ -6,11 +6,6 @@ import Main from "./components/Main.js";
 import Footer from "./components/Footer.js";
 import CreateList from "./components/CreateList.js";
 import ListStore from "./components/ListStore.js";
-<<<<<<< HEAD
-import User from "./components/User.js";
-import { Route, Switch } from "react-router-dom";
-import axios from "axios";
-=======
 import User from "./components/User.js"; //emdlr
 import { Route, Switch } from "react-router-dom";
 import axios from "axios";
@@ -205,7 +200,6 @@ class App extends Component {
     );
   }
 } // end class
->>>>>>> dfc527c47bc422d3b2a60b30b09dd61f91f862e8
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:3000/api";
 class App extends Component {
