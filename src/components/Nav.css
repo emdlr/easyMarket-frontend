@@ -1,12 +1,17 @@
 .nav {
   /* border: 1px solid red; */
-  text-align: right;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: flex-end;
 }
 
-.nav-home {
-  /* border: 1px solid blue; */
-  display: block;
-  padding: 6px 0;
-  padding-right: 40px;
-  box-sizing: border-box;
+.nav-sign {
+  border: 1px solid blue;
+  margin: 1vh;
+  padding: 0.5vh;
+}
+
+.nav-login {
+  margin: 1vh;
 }

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ListPreview from "./ListPreview.js";
 import "./ProductSelector.css";
+import axios from "axios";
 
 //const ProductSelector = (props) => {
 class ProductSelector extends Component {
@@ -192,14 +193,15 @@ class ProductSelector extends Component {
     }
   };
 
-  // METHOD TO REOVE A PRODUCT FROM THE PREVIEW LIST TRIGGERED FROM PREVIEW LIST
+  // METHOD TO REMOVE A PRODUCT FROM THE PREVIEW LIST TRIGGERED FROM PREVIEW LIST
   handleProductPreview = (e) => {
     this.handleButton(e, "preview-list");
     this.removeProduct(e, "preview-list");
   }; // End handleProductPreview
 
   // Method to persist the list in the database
-  createCart = () => {
+  createCart = async () => {
+    // console.log(this.)
     let listArray = [];
     for (let i = 0; i < this.state.listPreview.length; i++) {
       let tmpObj = {};
@@ -211,25 +213,29 @@ class ProductSelector extends Component {
 
       listArray.push(tmpObj);
     }
-    console.log(listArray);
+    const response = await axios.post(
+      `${this.props.backendUrl}/lists`,
+      listArray
+    );
   };
 
   render() {
     const storeProducts = this.props.productsByStore.map((product) => {
       return (
         <div
-          key={product.id}
-          id={product.id}
+          key={product.productId}
+          // id={product.id}
+          id={product.productId}
           className="individual-product-container"
         >
           <img
-            id={`image${product.id}`}
+            id={`image${product.productId}`}
             className="product-selector-image"
             src={product.Product.picture}
             alt=""
           />
           <input
-            id={`imageURL${product.id}`}
+            id={`imageURL${product.productId}`}
             type="hidden"
             name="imageURL"
             value={product.Product.picture}
@@ -237,28 +243,28 @@ class ProductSelector extends Component {
           />
 
           <input
-            id={`productId${product.id}`}
+            id={`productId${product.productId}`}
             type="hidden"
             name="productId"
-            value={product.id}
+            value={product.productId}
             disabled
           />
           <input
-            id={`userId${product.id}`}
+            id={`userId${product.productId}`}
             type="hidden"
             name="userId"
-            value="1"
+            value={this.props.userId ? this.props.userId : "1"}
             disabled
           />
           <input
-            id={`listName${product.id}`}
+            id={`listName${product.productId}`}
             type="hidden"
             name="listName"
             value={this.props.listHeader.listName}
             disabled
           />
           <input
-            id={`productDescription${product.id}`}
+            id={`productDescription${product.productId}`}
             type="text"
             name="productDescription"
             value={product.Product.description}
@@ -266,7 +272,7 @@ class ProductSelector extends Component {
             disabled
           />
           <input
-            id={`productPrice${product.id}`}
+            id={`productPrice${product.productId}`}
             type="text"
             name="productPrice"
             value={product.price}
@@ -274,26 +280,26 @@ class ProductSelector extends Component {
             disabled
           />
           <input
-            id={`quantity${product.id}`}
+            id={`quantity${product.productId}`}
             type="number"
             name="quantity"
             onChange={this.handleChange}
             className="medium-size-sel number-field"
           />
           <input
-            id={`cost${product.id}`}
+            id={`cost${product.productId}`}
             type="number"
             name="cost"
             className="medium-size-sel number-field"
             disabled
           />
           <input
-            id={`productStatus${product.id}`}
+            id={`productStatus${product.productId}`}
             type="hidden"
             name="productStatus"
           />
           <button
-            id={`buttonSelect${product.id}`}
+            id={`buttonSelect${product.productId}`}
             className="button-product-unchecked"
             type="button"
             name="buttonSelect"
@@ -318,11 +324,6 @@ class ProductSelector extends Component {
           {storeProducts}
         </div>
         <div className="list-preview-container">
-          {/* <div className="list-preview-header-container">
-            <p className="large-size-sel">Description</p>
-            <p className="small-size-sel">Qty</p>
-            <p className="small-size-sel">Cost</p>
-          </div> */}
           <div className="list-preview-all-product-container">
             <ListPreview
               listPreview={this.state.listPreview}
@@ -330,19 +331,10 @@ class ProductSelector extends Component {
               handleProductPreview={this.handleProductPreview}
             />
           </div>
-          {/* <div className="list-preview-total-container">
-            <input
-              id="list-preview-total"
-              className="medium-size"
-              type="number"
-              disabled={true}
-            />
-          </div> */}
         </div>
       </div>
     );
   } // end render
 } // end class
-//};
 
 export default ProductSelector;

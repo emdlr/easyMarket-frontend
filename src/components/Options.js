@@ -2,7 +2,8 @@ import React from "react";
 import "./Options.css";
 import { Link } from "react-router-dom";
 
-const Options = () => {
+const Options = (props) => {
+  console.log("props.user-id", props.userId);
   return (
     <div className="options-container">
       <div className="options-row-1">
@@ -20,10 +21,17 @@ const Options = () => {
         <Link to="/" className="option">
           Units
         </Link>
-        <Link className="option" to="/CreateList">
+        {/* <Link className="option" to="/CreateList">
+          Create list
+        </Link> */}
+        <Link className="option" to="/SelectStore">
           Create list
         </Link>
-        <Link to="/" className="option">
+
+        <Link
+          to={props.userId ? `/user/${props.userId}` : ""}
+          className="option"
+        >
           Pick list
         </Link>
       </div>
