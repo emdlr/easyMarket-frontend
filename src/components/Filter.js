@@ -2,13 +2,9 @@ import React, { Component } from "react";
 import "./Filter.css";
 
 class Filter extends Component {
-  // constructor() {
-  //   super();
-  // }
-
+  // In case we want to implement filtering by categories
   componentDidMount() {
     //  this.props.populateCategory();
-    //  this.props.populateProduct();
   }
 
   render() {
@@ -16,9 +12,8 @@ class Filter extends Component {
     return (
       <div>
         <div className="filter-list-data">
-          <label>Store:</label>
-          <h5>{this.props.listHeader.storeName}</h5>
-          <label>List: </label>
+          <p>{this.props.listHeader.storeName}</p>
+          <p> /</p>
           <p>{this.props.listHeader.listName}</p>
         </div>
         {/* <div className="filter-controls">

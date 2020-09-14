@@ -8,24 +8,63 @@ class ListPreview extends Component {
       return (
         <div className="list-preview-product-container" key={item.productId}>
           <input type="hidden" value={item.productId} />
-          {/* <p className="list-preview-element-no-visible">{item.productId}</p> */}
           <input type="hidden" value={item.userId} />
-          {/* <p className="list-preview-element-no-visible">{item.userId}</p> */}
           <input type="hidden" value={item.listName} />
-          {/* <p className="list-preview-element-no-visible">{item.listName}</p> */}
           <input type="hidden" value={item.pickedStatus} />
-          {/* <p className="list-preview-element-no-visible">{item.pickedStatus}</p> */}
+          <img src={item.imageURL} alt="" className="list-preview-image" />
           <input
-            className="medium-size"
+            className="large-size"
             value={item.productDescription}
             disabled={true}
           />
-          <input className="small-size" value={item.quantity} disabled={true} />
-          <input className="small-size" value={item.cost} disabled={true} />
+          <input
+            className="small-size number-field"
+            type="number"
+            value={item.quantity}
+            disabled={true}
+          />
+          <input
+            className="small-size number-field"
+            type="number"
+            value={item.cost}
+            disabled={true}
+          />
+          <button
+            type="button"
+            name="buttonDelete"
+            // onClick={this.handleProduct}
+          >
+            X
+          </button>
         </div>
       );
     });
-    return <div>{htmlListPreview}</div>;
+    return (
+      <div>
+        <div>
+          <div className="list-preview-header-control">
+            <button type="button" onClick={this.props.createCart}>
+              Create shopping cart
+            </button>
+          </div>
+          <div className="list-preview-header-container">
+            <p className="list-preview-padding1"></p>
+            <p className="large-size">Description</p>
+            <p className="small-size">Qty</p>
+            <p className="small-size">Cost</p>
+          </div>
+        </div>
+        {htmlListPreview}
+        <div className="list-preview-total-container">
+          <input
+            id="list-preview-total"
+            className="medium-size number-field"
+            type="number"
+            disabled={true}
+          />
+        </div>
+      </div>
+    );
   }
 } // end class
 

@@ -19,6 +19,7 @@ class ProductSelector extends Component {
 
   // Method to handle the change on QUantity field
   handleChange = (e) => {
+    // Get html elements for manipulation
     const htmlParentNode = document.getElementById(e.target.id).parentNode.id;
     const htmlSubmitButton = document.getElementById(
       `buttonSelect${htmlParentNode}`
@@ -34,28 +35,29 @@ class ProductSelector extends Component {
       `buttonSelect${htmlParentNode}`
     );
 
+    // Evaluate if there is quantity or not
     if (
       e.target.value === null ||
       e.target.value <= 0 ||
       e.target.value === ""
     ) {
+      // If there is not quantity: Disable button, clean related fields and remove className to return the button to the default styling
       htmlSubmitButton.disabled = true;
       htmlCost.value = "";
       htmlProductStatus.value = "";
-      // htmlButtonSelect.value = "Check";
       htmlButtonSelect.classList.remove("button-product-checked");
     } else {
+      // If there is quantity: Enable button and calculate cost
       htmlSubmitButton.disabled = false;
       htmlCost.value = htmlProductPrice.value * e.target.value;
     }
   }; // End handleChange
 
-  // Method to handle the button behavior
+  // METHOD TO HANDLE THE BUTTON BEHAVIOR
   handleButton = (e) => {
+    // Get html elements for manipulation
     const htmlParentNodeId = document.getElementById(e.target.id).parentNode.id;
-    // const htmlParentNode = document.getElementById(e.target.id).parentNode;
     const htmlProductCost = document.getElementById(`cost${htmlParentNodeId}`);
-
     const htmlProductStatus = document.getElementById(
       `productStatus${htmlParentNodeId}`
     );
@@ -63,27 +65,30 @@ class ProductSelector extends Component {
       `buttonSelect${htmlParentNodeId}`
     );
 
+    // If cost is valid then we can move forward
     if (htmlProductCost.value !== "") {
+      // Checking the current status of the product if it is checked or unchecked
       if (
         htmlProductStatus.value === "" ||
         htmlProductStatus.value === "Unchecked"
       ) {
+        // if it is not checked then handle the check styling (putting color green and Uncheck legend in button)
         htmlProductStatus.value = "Checked";
-        // htmlButtonSelect.value = "Uncheck";
+        htmlButtonSelect.innerText = "Uncheck";
         htmlButtonSelect.classList.add("button-product-checked");
-        // htmlParentNode.style.visibility = "hidden";
       } else if (htmlProductStatus.value === "Checked") {
+        // if it is checked then handle the uncheck styling (removing color green and putting Check legend in button)
         htmlProductStatus.value = "Unchecked";
-        // htmlButtonSelect.value = "Check";
+        htmlButtonSelect.innerText = "Check";
         htmlButtonSelect.classList.remove("button-product-checked");
       }
     }
   };
 
-  // Method to insert a product into the Preview List
+  // METHOD TO INSERT A PRODUCT IN THE PREVIEW LIST
   insertProduct = (e) => {
     let tempObj = {};
-    // let tmpArray = [];
+    // Getting html components for manipulation
     const htmlParentNodeId = document.getElementById(e.target.id).parentNode.id;
     const htmlProductId = document.getElementById(
       `productId${htmlParentNodeId}`
@@ -100,9 +105,12 @@ class ProductSelector extends Component {
     const htmlProductStatus = document.getElementById(
       `productStatus${htmlParentNodeId}`
     );
+    const htmlImageURL = document.getElementById(`imageURL${htmlParentNodeId}`);
     const htmlTotal = document.getElementById("list-preview-total");
 
+    // If there is a cost that means we are OK to insert the product in the preview list
     if (htmlProductCost.value !== "") {
+      // Creting an object with the data of the product
       tempObj["productId"] = htmlProductId.value;
       tempObj["userId"] = htmlUserId.value;
       tempObj["productStatus"] = htmlProductStatus.value;
@@ -110,17 +118,22 @@ class ProductSelector extends Component {
       tempObj["productDescription"] = htmlProductDescription.value;
       tempObj["quantity"] = htmlProductQuantity.value;
       tempObj["cost"] = htmlProductCost.value;
-      tempObj["pickedStatus"] = "True";
-      console.log("Product Cost value", htmlProductCost.value);
+      tempObj["pickedStatus"] = "false";
+      tempObj["imageURL"] = htmlImageURL.value;
+      // Updating preview list total
       this.total += parseFloat(htmlProductCost.value);
       htmlTotal.value = this.total;
-      console.log("Product Cost value", htmlTotal.value);
+      // Pushing the product object in a temp array
       this.tmpArray.push(tempObj);
+      // Updating the state with the content of temp array
       this.setState({ listPreview: this.tmpArray });
     }
   };
 
+  // METHOD TO REMIVE A PRODUCT FROM THE PREVIEW LIST
   removeProduct(e) {
+    console.log("ORIGIN", origin);
+    // Getting HTML elements for manipulation
     const htmlParentNodeId = document.getElementById(e.target.id).parentNode.id;
     const htmlProductId = document.getElementById(
       `productId${htmlParentNodeId}`
@@ -130,25 +143,25 @@ class ProductSelector extends Component {
       `quantity${htmlParentNodeId}`
     );
 
+    // When removing the product from the list:
+    // Update the Total, reset the quantity and cost in the product list
     const htmlTotal = document.getElementById("list-preview-total");
-    console.log(htmlProductCost);
-
-    console.log("Product Cost value remove", this.total, htmlProductCost.value);
-
     this.total -= htmlProductCost.value;
     htmlTotal.value = this.total;
     htmlProductCost.value = "";
     htmlProductQuantity.value = "";
 
-    console.log("Removign a product", this.state.listPreview);
+    // Get all the products from the preview list differents from the one I'm removing and set the state and the temporal array
+    // that keeps the product in the preview list
     let updatedListPreview = this.state.listPreview.filter(
       (item) => item.productId !== htmlProductId.value
     );
-    console.log(updatedListPreview);
     this.setState({ listPreview: updatedListPreview });
     this.tmpArray = updatedListPreview;
   }
 
+  // When the user triggers an event to check/uncheck the product:
+  // Define if it is an action of inserting or deleting a product to/from the preview list
   handleProduct = (e) => {
     const htmlParentNodeId = document.getElementById(e.target.id).parentNode.id;
     const htmlProductStatus = document.getElementById(
@@ -161,8 +174,31 @@ class ProductSelector extends Component {
     } else {
       this.removeProduct(e);
     }
+  };
 
-    // this.handleView(e);
+  // Method to persist the list in the database
+  createCart = () => {
+    console.log("Creating list...", this.state.listPreview);
+    let listArray = [];
+    for (let i = 0; i < this.state.listPreview.length; i++) {
+      let tmpObj = {};
+      console.log(
+        this.state.listPreview[i],
+        this.state.listPreview[i].productId
+      );
+      tmpObj["productId"] = this.state.listPreview[i].productId;
+      tmpObj["userId"] = this.state.listPreview[i].userId;
+      tmpObj["listName"] = this.state.listPreview[i].listName;
+      tmpObj["quantity"] = this.state.listPreview[i].quantity;
+      tmpObj["cost"] = this.state.listPreview[i].cost;
+
+      listArray.push(tmpObj);
+    }
+    console.log(listArray);
+
+    // for (const [property, value] of entries) {
+    //   console.log(`There are ${count} ${fruit}s`)
+    // }
   };
 
   render() {
@@ -179,7 +215,25 @@ class ProductSelector extends Component {
         product.Product.picture
       );
       return (
-        <div key={product.id} id={product.id}>
+        <div
+          key={product.id}
+          id={product.id}
+          className="individual-product-container"
+        >
+          <img
+            id={`image${product.id}`}
+            className="product-selector-image"
+            src={product.Product.picture}
+            alt=""
+          />
+          <input
+            id={`imageURL${product.id}`}
+            type="hidden"
+            name="imageURL"
+            value={product.Product.picture}
+            disabled
+          />
+
           <input
             id={`productId${product.id}`}
             type="hidden"
@@ -206,6 +260,7 @@ class ProductSelector extends Component {
             type="text"
             name="productDescription"
             value={product.Product.description}
+            className="large-size-sel"
             disabled
           />
           <input
@@ -213,6 +268,7 @@ class ProductSelector extends Component {
             type="text"
             name="productPrice"
             value={product.price}
+            className="medium-size-sel number-field"
             disabled
           />
           <input
@@ -220,32 +276,65 @@ class ProductSelector extends Component {
             type="number"
             name="quantity"
             onChange={this.handleChange}
+            className="medium-size-sel number-field"
           />
-          <input id={`cost${product.id}`} type="number" name="cost" disabled />
+          <input
+            id={`cost${product.id}`}
+            type="number"
+            name="cost"
+            className="medium-size-sel number-field"
+            disabled
+          />
           <input
             id={`productStatus${product.id}`}
             type="hidden"
             name="productStatus"
           />
-          <input
+          <button
             id={`buttonSelect${product.id}`}
             className="button-product-unchecked"
             type="button"
             name="buttonSelect"
-            value=">>"
             onClick={this.handleProduct}
-          />
+          >
+            Check
+          </button>
         </div>
       );
     });
     return (
       <div className="product-selector-container">
-        <div className="product-container">{storeProducts}</div>
-        <div className="list-preview-container">
-          <div className="list-preview-total-container">
-            <input id="list-preview-total" type="number" disabled={true} />
+        <div className="all-product-container">
+          <div className="product-header-container">
+            <p className="padding1"></p>
+            <p className="large-size-sel">Description</p>
+            <p className="medium-size-sel">Price</p>
+            <p className="medium-size-sel">Quantity</p>
+            <p className="medium-size-sel">Amount</p>
+            <p className="padding2"></p>
           </div>
-          <ListPreview listPreview={this.state.listPreview} />
+          {storeProducts}
+        </div>
+        <div className="list-preview-container">
+          {/* <div className="list-preview-header-container">
+            <p className="large-size-sel">Description</p>
+            <p className="small-size-sel">Qty</p>
+            <p className="small-size-sel">Cost</p>
+          </div> */}
+          <div className="list-preview-all-product-container">
+            <ListPreview
+              listPreview={this.state.listPreview}
+              createCart={this.createCart}
+            />
+          </div>
+          {/* <div className="list-preview-total-container">
+            <input
+              id="list-preview-total"
+              className="medium-size"
+              type="number"
+              disabled={true}
+            />
+          </div> */}
         </div>
       </div>
     );

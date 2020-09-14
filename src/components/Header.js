@@ -5,7 +5,9 @@ function Header() {
   return (
     <div className="header">
       <p>easyMarket</p>
-      <img src="/easymarket.jpg" className="header-logo" alt=""></img>
+      <div className="header-image-container">
+        <img src="/easymarket.jpg" className="header-logo" alt=""></img>
+      </div>
     </div>
   );
 }
