@@ -162,7 +162,7 @@ class ProductSelector extends Component {
     // When removing the product from the list:
     // Update the Total, reset the quantity and cost in the product list
     const htmlTotal = document.getElementById("list-preview-total");
-    this.total -= htmlProductCost.value;
+    this.total -= parseFloat(htmlProductCost.value);
     htmlTotal.value = this.total;
     htmlProductCost.value = "";
     htmlProductQuantity.value = "";
