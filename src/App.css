@@ -1,5 +1,5 @@
 .App {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   display: grid;
   grid-template-columns: 20% 60% 20%;
   grid-template-rows: 18% 5% 10% 55% 5% 5%; /* Header, Nav,Controllers,Main,Totals,Footer*/

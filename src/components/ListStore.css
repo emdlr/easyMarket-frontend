@@ -1,7 +1,21 @@
 .list-store-container {
-  border: 1px solid blue;
-  display: block;
+  /* border: 1px solid blue; */
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
   grid-column: span 3;
-  /* width: 25%; */
   font-size: 15px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.list-store-container * {
+  margin-top: 10px;
+}
+
+.list-store-container label {
+  margin-left: 10px;
+}
+
+.list-store-container button {
+  margin-left: 10px;
 }

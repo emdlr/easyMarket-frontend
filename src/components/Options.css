@@ -1,7 +1,7 @@
 .options-container {
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   height: 100%;
 }
 
@@ -18,15 +18,16 @@
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   height: 50%;
 }
 
 .option {
   width: 15vw;
   height: 27vh;
-  border: 1px solid red;
+  border: 1px solid lightgray;
   text-align: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .option:active,
@@ -37,4 +38,9 @@ a:link {
 
 .option:hover {
   text-decoration: underline;
+}
+
+.option-image {
+  max-width: 100%;
+  max-height: 85%;
 }

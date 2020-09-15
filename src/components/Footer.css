@@ -1,3 +1,8 @@
 .footer {
-  border: 1px solid orange;
+  /* border: 1px solid orange; */
+  text-align: center;
+}
+
+.footer p {
+  font-size: 10px;
 }

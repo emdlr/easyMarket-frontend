@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 class ListStore extends Component {
   componentDidMount() {
-    console.log("populating stores.....");
     this.props.populateStore();
   }
   render() {

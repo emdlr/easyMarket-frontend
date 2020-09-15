@@ -3,7 +3,6 @@ import "./ListPreview.css";
 
 class ListPreview extends Component {
   render() {
-    // console.log("this.props.tmpArray", this.props.tmpArray);
     const htmlListPreview = this.props.listPreview.map((item, index) => {
       return (
         <div
@@ -46,30 +45,8 @@ class ListPreview extends Component {
       );
     });
     return (
-      <div>
-        <div>
-          <div className="list-preview-header-control">
-            <button type="button" onClick={this.props.createCart}>
-              Create shopping cart
-            </button>
-          </div>
-          <div className="list-preview-header-container">
-            <p className="list-preview-padding1"></p>
-            <p className="large-size">Description</p>
-            <p className="small-size">Qty</p>
-            <p className="small-size">Cost</p>
-            <p className="list-preview-padding2"></p>
-          </div>
-        </div>
+      <div className="list-preview-all-product_container">
         {htmlListPreview}
-        <div className="list-preview-total-container">
-          <input
-            id="list-preview-total"
-            className="medium-size number-field"
-            type="number"
-            disabled={true}
-          />
-        </div>
       </div>
     );
   }

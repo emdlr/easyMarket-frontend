@@ -1,15 +1,24 @@
 .nav {
   /* border: 1px solid red; */
   display: flex;
-  flex-flow: row wrap;
-  align-items: center;
   justify-content: flex-end;
+  align-items: center;
 }
 
+.nav p {
+  font-size: small;
+}
 .nav-sign {
-  border: 1px solid blue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid lightgray;
+  background-color: #f0f0f0;
   margin: 1vh;
   padding: 0.5vh;
+  font-size: 10px;
+  width: 3%;
+  border-radius: 5px;
 }
 
 .nav-login {

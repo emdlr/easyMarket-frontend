@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import ListPreview from "./ListPreview.js";
 import "./ProductSelector.css";
 import axios from "axios";
@@ -131,7 +132,7 @@ class ProductSelector extends Component {
       tempObj["imageURL"] = htmlImageURL.value;
       // Updating preview list total
       this.total += parseFloat(htmlProductCost.value);
-      htmlTotal.value = this.total;
+      htmlTotal.value = "$" + this.total.toString();
       // Pushing the product object in a temp array
       this.tmpArray.push(tempObj);
       // Updating the state with the content of temp array
@@ -149,7 +150,6 @@ class ProductSelector extends Component {
         htmlParentNodeId.indexOf("-") + 1
       );
     }
-    console.log(htmlParentNodeId);
 
     // const htmlParentNodeId = document.getElementById(e.target.id).parentNode.id;
     const htmlProductId = document.getElementById(
@@ -164,7 +164,7 @@ class ProductSelector extends Component {
     // Update the Total, reset the quantity and cost in the product list
     const htmlTotal = document.getElementById("list-preview-total");
     this.total -= parseFloat(htmlProductCost.value);
-    htmlTotal.value = this.total;
+    htmlTotal.value = "$" + this.total.toString();
     htmlProductCost.value = "";
     htmlProductQuantity.value = "";
 
@@ -201,7 +201,6 @@ class ProductSelector extends Component {
 
   // Method to persist the list in the database
   createCart = async () => {
-    // console.log(this.)
     let listArray = [];
     for (let i = 0; i < this.state.listPreview.length; i++) {
       let tmpObj = {};
@@ -321,14 +320,42 @@ class ProductSelector extends Component {
             <p className="medium-size-sel">Amount</p>
             <p className="padding2"></p>
           </div>
-          {storeProducts}
+          <div className="x">{storeProducts}</div>
         </div>
         <div className="list-preview-container">
+          <div className="list-preview-header-control">
+            <Link to="/">
+              <button
+                type="button"
+                onClick={this.createCart}
+                disabled={!this.state.listPreview.length}
+              >
+                Create shopping cart
+              </button>
+            </Link>
+          </div>
+          <div className="list-preview-header-container">
+            <p className="list-preview-padding1"></p>
+            <p className="large-size">Description</p>
+            <p className="small-size">Qty</p>
+            <p className="small-size">Cost</p>
+            <p className="list-preview-padding2"></p>
+          </div>
           <div className="list-preview-all-product-container">
             <ListPreview
               listPreview={this.state.listPreview}
               createCart={this.createCart}
               handleProductPreview={this.handleProductPreview}
+            />
+          </div>
+          <div className="list-preview-total-container">
+            <p>Amount:</p>
+            <input
+              id="list-preview-total"
+              className="medium-size number-field"
+              type="text"
+              disabled={true}
+              defaultValue="0"
             />
           </div>
         </div>

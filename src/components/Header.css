@@ -9,16 +9,13 @@
 
 .header p {
   font-size: 60px;
+  color: white;
   /* border: 1px solid white; */
 }
 
 .header-image-container {
-  /* border: 1px solid yellow; */
+  border: 1px solid yellow;
   height: 100%;
   padding: 40px 0;
   box-sizing: border-box;
-}
-.header-logo {
-  width: 30px;
-  /* border: 1px solid black; */
 }
