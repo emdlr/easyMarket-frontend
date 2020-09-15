@@ -73,6 +73,7 @@ export default class Nav extends Component {
       });
     }
   };
+  //BORRAR ESTA FUNC
   goLists = (e) => {
     this.setState({
       reset: !this.state.reset,

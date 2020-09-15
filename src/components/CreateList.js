@@ -22,19 +22,12 @@ const CreateList = (props) => {
           getProductsByStore={props.getProductsByStore}
           productsByStore={props.productsByStore}
           listHeader={props.listHeader}
-<<<<<<< HEAD
-=======
           userId={props.userId}
           backendUrl={props.backendUrl}
           setView={props.setView}
->>>>>>> dfc527c47bc422d3b2a60b30b09dd61f91f862e8
         />
       </div>
     </div>
   );
 }; // end function
-<<<<<<< HEAD
 export default CreateList;
-=======
-export default CreateList;
->>>>>>> dfc527c47bc422d3b2a60b30b09dd61f91f862e8
