@@ -135,107 +135,187 @@ export default class User extends Component {
   render() {
     if (!this.state.isIndividual) {
       return (
-        <div className="userContainer">
-          <p className="greeting">HELLO {`${this.state.userName.toUpperCase()}`}</p>
-          <p>Your Lists:</p>
-          <table className="listsTable">
-            <thead>
-              <tr>
-                <th className="leftColumn">List Name</th>
-                <th className="middleColumn">Status</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-            {this.state.listNames.map((list, key) => {
-              return (
-                <tr key={key} className="">
-                  <td className="leftColumn" name={this.props.match.params.id} onClick={this.getList}>
-                    {list}
-                  </td>
-                  <td id={`list${key}`} className="middleColumn"
-                  onLoad={this.getListStatus(list,this.props.match.params.id,`list${key}`)}
-                  >
-                  </td>
-                  <td
-                    name={list}
-                    name2={this.props.match.params.id}
-                    onClick={this.deleteList}
-                    className="list-preview-delete-button"
-                  >
-                    X
-                  </td>
-                </tr>
-              );
-            })}
-            </tbody>
-          </table>
-        </div>
-      );
+              <div className="userContainer">
+                  <div className="greeting">HELLO {`${this.state.userName.toUpperCase()}`}</div>
+                  <div className="userList">Your Lists</div>
+                  <div className="lists-header-cont">
+                        <div id="header1" className="listHeaders">List Name</div>
+                        <div id="header2" className="listHeaders">Status</div>
+                        <div></div>
+                  </div>
+                  {this.state.listNames.map((list, key) => {
+          return (
+                  <div key={key} className="lists-names-body">
+                      <div className="listData" name={this.props.match.params.id} onClick={this.getList}>
+                        {list}
+                      </div>
+                      <div id={`list${key}`} className="listData"
+                            onLoad={this.getListStatus(list,this.props.match.params.id,`list${key}`)}>
+                      </div>
+                      <div
+                        name={list}
+                        name2={this.props.match.params.id}
+                        onClick={this.deleteList}
+                        className="list-delete-button">X
+                      </div>
+                  </div>  
+                  );
+              })}
+              </div>
+          );
     } else {
       return (
         <div className="userContainer">
-           <table className="listHeader">
-             <tr>
-          <td><p className="greeting">HELLO {`${this.state.userName.toUpperCase()}`}</p></td>
-          <td><center><div className="lists-button" onClick={this.myLists}>Back to my Lists</div></center></td>
-          </tr>
-            <tr>
-              <td></td>
-              <td className="middleColumn">Amount Picked</td>
-            </tr>
-            <tr>
-              <td className="greeting">{this.state.indListName}</td>
-              <td className="middleColumn"> 
+          <div className="listHead">
+            <div className="greeting">HELLO {`${this.state.userName.toUpperCase()}`}</div>
+            <div className="lists-button" onClick={this.myLists}>Back to my Lists</div>
+          </div>
+          <div className="listName">{this.state.indListName}</div>
+          <div className="list-headers-cont">
+            <div className="listHeaders">Picture</div>
+            <div className="listHeaders">Product</div>
+            <div className="listHeaders">Qty</div>
+            <div className="listHeaders">Unit</div>
+            <div></div>
+            <div className="listHeaders">Cost</div>
+            <div className="listHeaders">Picked?</div>
+          </div>
+          {this.state.individualList.map((product, key) => {
+  return ( 
+          <div className="list-body-cont">
+            <div className="picCol"><img src={product.prodPicture} className="pickImg" /></div>
+            <div className="prodCol">{product.prodName}</div>
+            <div className="qtyCol">{product.quantity}</div>
+            <div className="unitCol">{product.unit}</div>
+            <div className="dollarCol">$</div>
+            <div className="costCol">{product.cost}</div>
+            <div className="checkCol">
+              <input
+                type="checkbox"
+                className="checkbox"
+                name={product.id}
+                onClick={this.updatePick}
+                checked={product.isPicked ? true : false}/>
+            </div>
+          </div>
+              );
+            })}
+            <div className="list-footer">
+              <div>Amount Picked:</div>
+              <div>
                 <input
                   type="text"
                   className="pickedCost"
                   value={"$" + this.state.totalCost}
-                  disabled
-                />
-             </td>
-            </tr>
-          </table>
-          <table className="listsTable">
-            <thead>
-              <tr>
-                <th>Picture</th>
-                <th>Product</th>
-                <th>Qty</th>
-                <th>Unit</th>
-                <th></th>
-                <th>Cost</th>
-                <th>Picked?</th>
-              </tr>
-            </thead>
-            <tbody>
-            {this.state.individualList.map((product, key) => {
-              return (
-                <tr key={key}>
-                  <td>
-                    <img src={product.prodPicture} className="pickImg" />
-                  </td>
-                  <td>{product.prodName}</td>
-                  <td className="middleColumn">{product.quantity}</td>
-                  <td className="rightColumn">{product.unit}</td>
-                  <td>$</td>
-                  <td className="rightColumn">{product.cost}</td>
-                  <td className="middleColumn">
-                    <input
-                      type="checkbox"
-                      className="checkbox"
-                      name={product.id}
-                      onClick={this.updatePick}
-                      checked={product.isPicked ? true : false}
-                    />
-                  </td>
-                </tr>
-              );
-            })}
-            </tbody>
-          </table>
+                  disabled />
+              </div>
+            </div>
         </div>
       );
     }
+    // if (!this.state.isIndividual) {
+    //   return (
+    //     <div className="userContainer">
+    //       <p className="greeting">HELLO {`${this.state.userName.toUpperCase()}`}</p>
+    //       <p>Your Lists:</p>
+    //       <table className="listsTable">
+    //         <thead>
+    //           <tr>
+    //             <th className="leftColumn">List Name</th>
+    //             <th className="middleColumn">Status</th>
+    //             <th></th>
+    //           </tr>
+    //         </thead>
+    //         <tbody>
+    //         {this.state.listNames.map((list, key) => {
+    //           return (
+    //             <tr key={key} className="">
+    //               <td className="leftColumn" name={this.props.match.params.id} onClick={this.getList}>
+    //                 {list}
+    //               </td>
+    //               <td id={`list${key}`} className="middleColumn"
+    //               onLoad={this.getListStatus(list,this.props.match.params.id,`list${key}`)}
+    //               >
+    //               </td>
+    //               <td
+    //                 name={list}
+    //                 name2={this.props.match.params.id}
+    //                 onClick={this.deleteList}
+    //                 className="list-preview-delete-button"
+    //               >
+    //                 X
+    //               </td>
+    //             </tr>
+    //           );
+    //         })}
+    //         </tbody>
+    //       </table>
+    //     </div>
+    //   );
+    // } else {
+    //   return (
+    //     <div className="userContainer">
+    //        <table className="listHeader">
+    //          <tr>
+    //       <td><p className="greeting">HELLO {`${this.state.userName.toUpperCase()}`}</p></td>
+    //       <td><center><div className="lists-button" onClick={this.myLists}>Back to my Lists</div></center></td>
+    //       </tr>
+    //         <tr>
+    //           <td></td>
+    //           <td className="middleColumn">Amount Picked</td>
+    //         </tr>
+    //         <tr>
+    //           <td className="greeting">{this.state.indListName}</td>
+    //           <td className="middleColumn"> 
+    //             <input
+    //               type="text"
+    //               className="pickedCost"
+    //               value={"$" + this.state.totalCost}
+    //               disabled
+    //             />
+    //          </td>
+    //         </tr>
+    //       </table>
+    //       <table className="listsTable">
+    //         <thead>
+    //           <tr>
+    //             <th>Picture</th>
+    //             <th>Product</th>
+    //             <th>Qty</th>
+    //             <th>Unit</th>
+    //             <th></th>
+    //             <th>Cost</th>
+    //             <th>Picked?</th>
+    //           </tr>
+    //         </thead>
+    //         <tbody>
+    //         {this.state.individualList.map((product, key) => {
+    //           return (
+    //             <tr key={key}>
+    //               <td>
+    //                 <img src={product.prodPicture} className="pickImg" />
+    //               </td>
+    //               <td>{product.prodName}</td>
+    //               <td className="middleColumn">{product.quantity}</td>
+    //               <td className="rightColumn">{product.unit}</td>
+    //               <td>$</td>
+    //               <td className="rightColumn">{product.cost}</td>
+    //               <td className="middleColumn">
+    //                 <input
+    //                   type="checkbox"
+    //                   className="checkbox"
+    //                   name={product.id}
+    //                   onClick={this.updatePick}
+    //                   checked={product.isPicked ? true : false}
+    //                 />
+    //               </td>
+    //             </tr>
+    //           );
+    //         })}
+    //         </tbody>
+    //       </table>
+    //     </div>
+    //   );
+    // }
   }
 }
