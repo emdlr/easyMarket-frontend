@@ -26,6 +26,8 @@ class ListPreview extends Component {
             value={item.quantity}
             disabled={true}
           />
+          <input className="x-small-size" value="$" disabled={true} />
+
           <input
             className="small-size number-field"
             type="number"
@@ -36,7 +38,7 @@ class ListPreview extends Component {
             id={`lpButton-${item.productId}`}
             type="button"
             name="buttonDelete"
-            className="list-preview-delete-button"
+            className="list-preview-del-button"
             onClick={this.props.handleProductPreview}
           >
             X

@@ -9,6 +9,7 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
+  margin-top: 5px;
 }
 
 .list-preview-product-container input {
@@ -20,7 +21,7 @@
   height: 25px;
 }
 
-.list-preview-delete-button {
+.list-preview-del-button {
   border-radius: 10px;
   background-color: red;
   color: white;
@@ -47,6 +48,13 @@
 
 .small-size {
   width: 45px;
+  /* border: 1px solid black; */
+  font-size: 8px;
+  border: none;
+}
+
+.x-small-size {
+  width: 6px;
   /* border: 1px solid black; */
   font-size: 8px;
   border: none;

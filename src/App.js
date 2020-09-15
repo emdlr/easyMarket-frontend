@@ -21,6 +21,7 @@ class App extends Component {
       listHeader: {},
       productsByStore: [],
       currentView: "",
+      listName: "",
       isLoggedIn: false, //emdlr
       userId: "", //emdlr
     }; // end state

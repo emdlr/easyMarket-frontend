@@ -224,6 +224,7 @@ class ProductSelector extends Component {
       this.props.productsByStore
     );
     const storeProducts = this.props.productsByStore.map((product) => {
+      console.log(product.Product.Unit.description);
       return (
         <div
           key={product.productId}
@@ -244,7 +245,6 @@ class ProductSelector extends Component {
             value={product.Product.picture}
             disabled
           />
-
           <input
             id={`productId${product.productId}`}
             type="hidden"
@@ -275,11 +275,20 @@ class ProductSelector extends Component {
             disabled
           />
           <input
+            id={`unit${product.productId}`}
+            type="text"
+            name="unit"
+            value={product.Product.Unit.description}
+            className="small-size-sel"
+            disabled
+          />
+          <input className="x-small-size-sel" value="$" disabled />
+          <input
             id={`productPrice${product.productId}`}
             type="text"
             name="productPrice"
             value={product.price}
-            className="medium-size-sel number-field"
+            className="small-size-sel number-field"
             disabled
           />
           <input
@@ -289,6 +298,7 @@ class ProductSelector extends Component {
             onChange={this.handleChange}
             className="medium-size-sel number-field product-selector-quantity"
           />
+          <input className="x-small-size-sel" value="$" disabled />
           <input
             id={`cost${product.productId}`}
             type="number"
@@ -319,9 +329,12 @@ class ProductSelector extends Component {
           <div className="product-header-container">
             <p className="padding1"></p>
             <p className="large-size-sel">Description</p>
-            <p className="medium-size-sel">Price($)</p>
+            <p className="small-size-sel">Unit</p>
+            <p className="padding3"></p>
+            <p className="small-size-sel">Price</p>
             <p className="medium-size-sel">Quantity</p>
-            <p className="medium-size-sel">Amount($)</p>
+            <p className="padding3"></p>
+            <p className="medium-size-sel">Amount</p>
             <p className="padding2"></p>
           </div>
           <div className="x">{storeProducts}</div>
@@ -342,6 +355,7 @@ class ProductSelector extends Component {
             <p className="list-preview-padding1"></p>
             <p className="large-size">Description</p>
             <p className="small-size">Qty</p>
+            <p className="x-small-size"> </p>
             <p className="small-size">Cost</p>
             <p className="list-preview-padding2"></p>
           </div>

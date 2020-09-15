@@ -47,6 +47,10 @@
   width: 60px;
 }
 
+.padding3 {
+  width: 11px;
+}
+
 .x {
   overflow: auto;
   /* border: 1px solid lightgray; */
@@ -67,6 +71,7 @@
 .individual-product-container * {
   margin-left: 10px;
   margin-top: 4px;
+  /* border: 1px solid red; */
 }
 
 .individual-product-container input {
@@ -76,7 +81,6 @@
 .product-selector-image {
   height: 25px;
   width: 25px;
-  /* width: 4%; */
 }
 
 .product-selector-quantity {
@@ -179,6 +183,12 @@
   font-size: 12px;
 }
 
+.x-small-size-sel {
+  width: 8px;
+  /* border: 1px solid black; */
+  font-size: 12px;
+}
+
 .large-size {
   width: 140px;
   /* border: 1px solid black; */
@@ -198,6 +208,11 @@
   /* border: 1px solid black; */
   font-size: 8px;
   border: none;
+}
+.x-small-size {
+  width: 6px;
+  /* border: 1px solid black; */
+  font-size: 8px;
 }
 
 .number-field {
