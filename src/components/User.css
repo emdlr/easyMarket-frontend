@@ -1,53 +1,112 @@
 .userContainer {
-  margin-left: 10px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-items: center;
+  align-items: center;
+  width: 100vw;
 }
+.lists-header-cont {
+  width: 25vw;
+  display: grid;
+  grid-template-columns: 50% 30% 20%;
+  grid-template-rows: 100%;
+}
+.userList {
+  text-align: center;
+  font-size: 1.5vw;
+}
+#header1 {
+  grid-column: 1;
+}
+#header2 {
+  grid-column: 2;
+}
+.lists-names-body {
+  width: 25vw;
+  display: grid;
+  grid-template-columns: 50% 30% 20%;
+  grid-template-rows: 100%;
+}
+.listNames {
+  grid-column: 1;
+}
+.listStatus {
+  grid-column: 2;
+}
+.greeting {
+  font-size: 2vw;
+  font-weight: 500;
+  text-align: center;
+}
+.listHeaders {
+  font-size: 1.5vw;
+  font-weight: 700;
+}
+.listHeader {
+  width: 35vw;
+}
+.listData {
+  font-size: 1.5vw;
+}
+.list-delete-button {
+  border-radius: 50px;
+  width: 1.5vw;
+  background-color: red;
+  color: white;
+  padding: 0.3vw;
+  font-weight: 900;
+  text-align: center;
+  border: 2px solid black;
+  font-size: 1vw;
+  text-shadow: 2px 3px 3px black;
+  -webkit-box-shadow: 3px 5px 18px 5px rgba(0, 0, 0, 0.7);
+  box-shadow: 3px 5px 5px 0px rgba(0, 0, 0, 0.75);
+}
+.list-delete-button:hover {
+  background-color: rgb(255, 93, 93);
+}
+/********************/
 .pickImg {
   width: 5vw;
   height: 5vh;
   border-radius: 5vw;
 }
-.listsTable {
-  width: 18vw;
-  font-size: 1.5vw;
-  overflow: auto;
+.listHead,
+.list-footer {
+  width: 40vw;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
 }
-.leftColumn {
-  text-align: start;
+.list-headers-cont,
+.list-body-cont {
+  width: 40vw;
+  display: grid;
+  grid-template-columns: 20% 20% 10% 5% 5% 10% 25%;
+  grid-template-rows: 100%;
 }
-.rightColumn {
-  text-align: end;
+.picCol {
+  grid-column: 1;
 }
-.middleColumn {
-  text-align: center;
+.prodCol {
+  grid-column: 2;
 }
-.list-preview-delete-button {
-  border-radius: 50px;
-  background-color: red;
-  color: white;
-  padding: 0.5vw;
-  font-weight: 900;
-  text-align: center;
-  border: 2px solid black;
+.qtyCol {
+  grid-column: 3;
 }
-.list-preview-delete-button:hover {
-  background-color: rgb(255, 93, 93);
+.unitCol {
+  grid-column: 4;
 }
-.greeting {
-  font-size: 2vw;
+.dollarCol {
+  grid-column: 5;
 }
-.lists-button {
-  border: 5px solid rgb(1, 82, 1);
-  background: rgb(39, 148, 39);
-  padding: 1vw;
-  width: max-content;
-  border-radius: 30px;
-  color: white;
-  font-size: 1vw;
-  font-weight: 900;
+.costCol {
+  grid-column: 6;
 }
-.lists-button:hover {
-  background: rgb(113, 215, 113);
+.checkCol {
+  grid-column: 7;
 }
+
 .checkbox {
   position: relative;
   background: white;
@@ -90,7 +149,4 @@
   font-style: italic;
   background: rgb(18, 176, 18);
   content: "YES";
-}
-.listHeader {
-  width: 35vw;
 }

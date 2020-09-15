@@ -82,6 +82,13 @@ class App extends Component {
     }
   };
 
+  // METHOD TO CAPTURE LIST NAME. USED ALSO TO ENABLE/DISABLE CREATE LIST BUTTON
+  handleCreateListButton = (e) => {
+    this.setState({
+      listName: e.target.value,
+    });
+  }; // End funtion
+
   // SET THE SPATE WITH THE CONTENT OF THE STORE SELECTED AND LIST NAME GIVEN
   getListHeader = () => {
     const tempHeader = {};
@@ -149,7 +156,6 @@ class App extends Component {
   }
 
   render() {
-    console.log("this.state: ", this.state);
     return (
       <div className="App">
         <Header />
@@ -167,7 +173,10 @@ class App extends Component {
             <ListStore
               populateStore={this.populateStore}
               getListHeader={this.getListHeader}
-              setView={this.setView}
+              handleCreateListButton={this.handleCreateListButton}
+              listName={this.state.listName}
+
+              // setView={this.setView}
             />
           </Route>
           <Route path="/CreateList">

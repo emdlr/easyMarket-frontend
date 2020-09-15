@@ -19,7 +19,7 @@ class ProductSelector extends Component {
     this.props.getProductsByStore();
   }
 
-  // Method to handle the change on QUantity field
+  // Method to handle the change on Quantity field
   handleChange = (e) => {
     // Get html elements for manipulation
     const htmlParentNode = document.getElementById(e.target.id).parentNode.id;
@@ -131,6 +131,7 @@ class ProductSelector extends Component {
       tempObj["pickedStatus"] = "false";
       tempObj["imageURL"] = htmlImageURL.value;
       // Updating preview list total
+      console.log("Updating Total on inserting...");
       this.total += parseFloat(htmlProductCost.value);
       htmlTotal.value = "$" + this.total.toString();
       // Pushing the product object in a temp array
@@ -184,11 +185,16 @@ class ProductSelector extends Component {
     const htmlProductStatus = document.getElementById(
       `productStatus${htmlParentNodeId}`
     );
+    const htmlProductCost = document.getElementById(`cost${htmlParentNodeId}`);
 
     this.handleButton(e);
+
     if (htmlProductStatus.value === "Checked") {
       this.insertProduct(e);
-    } else {
+    } else if (
+      htmlProductStatus.value === "Unchecked" &&
+      htmlProductCost.value !== ""
+    ) {
       this.removeProduct(e);
     }
   };
@@ -219,12 +225,7 @@ class ProductSelector extends Component {
   };
 
   render() {
-    console.log(
-      "PRODUCT SELECTOR (this.props.productsByStore): ",
-      this.props.productsByStore
-    );
     const storeProducts = this.props.productsByStore.map((product) => {
-      console.log(product.Product.Unit.description);
       return (
         <div
           key={product.productId}

@@ -7,11 +7,10 @@ function Header() {
   return (
     <div className="header">
       <Link to="/" className="headText">
-        <p>easyMarket</p>
+        <p>easy</p>
+        <img src="/favicon.png" className="header-logo" alt=""></img>
+        <p>Market</p>
       </Link>
-      {/* <div className="header-image-container"> */}
-      {/* <img src="/easymarket.jpg" className="header-logo" alt=""></img> */}
-      {/* </div> */}
     </div>
   );
 }

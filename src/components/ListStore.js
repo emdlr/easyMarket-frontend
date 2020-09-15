@@ -12,7 +12,12 @@ class ListStore extends Component {
         <label htmlFor="store">Select store: </label>
         <select id="store" name="storeSelector"></select>{" "}
         <label htmlFor="list-name">List name: </label>
-        <input id="listName" type="text" name="listName"></input>
+        <input
+          id="listName"
+          type="text"
+          name="listName"
+          onChange={this.props.handleCreateListButton}
+        ></input>
         <Link to="/CreateList">
           <button
             type="button"
@@ -20,6 +25,7 @@ class ListStore extends Component {
               this.props.getListHeader();
               // this.props.setView("list-products");
             }}
+            disabled={!this.props.listName.length}
           >
             Create list
           </button>

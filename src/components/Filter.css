@@ -7,12 +7,21 @@
 
 .filter-list-data {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   border-top: 1px solid lightgray;
   border-bottom: 1px solid lightgray;
   background-color: #f7a9a9;
+  box-sizing: border-box;
 }
+
+.filter-list-data p {
+  /* border: 1px solid black; */
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 .filter-category {
   /* border: 1px solid red; */
   width: 25%;

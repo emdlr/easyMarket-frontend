@@ -10,13 +10,11 @@ class Filter extends Component {
   // Header of the create list
   // It show the store and the list name
   render() {
-    console.log("Filter - listHeader: ", this.props.listHeader);
     return (
       <div>
         <div className="filter-list-data">
-          <p>{this.props.listHeader.storeName}</p>
-          <p> /</p>
-          <p>{this.props.listHeader.listName}</p>
+          <p>{"Store: " + this.props.listHeader.storeName}</p>
+          <p>{"List Name: " + this.props.listHeader.listName}</p>
         </div>
       </div>
     );
