@@ -219,6 +219,10 @@ class ProductSelector extends Component {
   };
 
   render() {
+    console.log(
+      "PRODUCT SELECTOR (this.props.productsByStore): ",
+      this.props.productsByStore
+    );
     const storeProducts = this.props.productsByStore.map((product) => {
       return (
         <div
@@ -283,13 +287,13 @@ class ProductSelector extends Component {
             type="number"
             name="quantity"
             onChange={this.handleChange}
-            className="medium-size-sel number-field"
+            className="medium-size-sel number-field product-selector-quantity"
           />
           <input
             id={`cost${product.productId}`}
             type="number"
             name="cost"
-            className="medium-size-sel number-field"
+            className="medium-size-sel number-field product-selector-quantity"
             disabled
           />
           <input
@@ -315,9 +319,9 @@ class ProductSelector extends Component {
           <div className="product-header-container">
             <p className="padding1"></p>
             <p className="large-size-sel">Description</p>
-            <p className="medium-size-sel">Price</p>
+            <p className="medium-size-sel">Price($)</p>
             <p className="medium-size-sel">Quantity</p>
-            <p className="medium-size-sel">Amount</p>
+            <p className="medium-size-sel">Amount($)</p>
             <p className="padding2"></p>
           </div>
           <div className="x">{storeProducts}</div>
@@ -355,7 +359,7 @@ class ProductSelector extends Component {
               className="medium-size number-field"
               type="text"
               disabled={true}
-              defaultValue="0"
+              defaultValue="$0"
             />
           </div>
         </div>

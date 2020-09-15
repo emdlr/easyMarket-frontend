@@ -7,7 +7,6 @@ import ProductSelector from "./ProductSelector.js";
 //Filter: A header with the store and list name
 //ProductSelector: Shows all the products by store to create the list
 const CreateList = (props) => {
-  console.log("CreateList PROPS.userId", props.userId);
   return (
     <div className="create-list-container">
       <div className="create-list-filter-container">
