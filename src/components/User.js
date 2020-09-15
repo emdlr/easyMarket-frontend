@@ -76,12 +76,14 @@ export default class User extends Component {
     );
     let indL = this.state.individualList;
     let total = 0;
+
     for (const prop in indL) {
       if (indL[prop].id == listId) {
         indL[prop].isPicked = nextStatus;
       }
       if (indL[prop].isPicked) total += indL[prop].cost;
     }
+
     let allLists = this.state.lists;
     for (const prop in allLists) {
       if (allLists[prop].id == listId) {
@@ -99,84 +101,156 @@ export default class User extends Component {
   };
   deleteList = async (e) => {
     e.preventDefault();
-    let listnames = this.state.listNames;
-    listnames.splice(listnames.indexOf(e.target.attributes.name.value), 1);
-    const list = await Axios.delete(
-      `${this.props.backendUrl}/lists/${e.target.attributes.name.value}/user/${e.target.attributes.name2.value}`
-    );
-    this.setState({
-      listNames: listnames,
-    });
+    if (window.confirm("Do you want to Delete this list?")) {
+      let listnames = this.state.listNames;
+      listnames.splice(listnames.indexOf(e.target.attributes.name.value), 1);
+      const list = await Axios.delete(
+        `${this.props.backendUrl}/lists/${e.target.attributes.name.value}/user/${e.target.attributes.name2.value}`
+      );
+      this.setState({
+        listNames: listnames,
+      });
+    }
   };
+  //NEW TO GET LIST STATUS
+  async getListStatus(name, user, rowId) {
+    const list = await Axios.get(
+      `${this.props.backendUrl}/lists?name=${name}&user=${user}`
+    );
+    let listStatus = document.querySelector(`#${rowId}`);
+    let idxPicked = false;
+    let idxNotPicked = false;
+
+    list.data.list.map((product) => {
+      product.pickedStatus ? (idxPicked = true) : (idxNotPicked = true);
+    });
+
+    if (idxPicked && idxNotPicked) listStatus.innerText = "InProcess";
+    else if (!idxPicked && idxNotPicked) listStatus.innerText = "New";
+    else if (idxPicked && !idxNotPicked) listStatus.innerText = "Completed";
+  }
   render() {
     if (!this.state.isIndividual) {
       return (
-        <div>
-          <p>HELLO {`${this.state.userName.toUpperCase()}`}</p>
+        <div className="userContainer">
+          <p className="greeting">
+            HELLO {`${this.state.userName.toUpperCase()}`}
+          </p>
           <p>Your Lists:</p>
-          <table>
-            {this.state.listNames.map((list, key) => {
-              return (
-                <tr key={key}>
-                  <td name={this.props.match.params.id} onClick={this.getList}>
-                    {list}
-                  </td>
-                  <td
-                    name={list}
-                    name2={this.props.match.params.id}
-                    onClick={this.deleteList}
-                  >
-                    Delete
-                  </td>
-                </tr>
-              );
-            })}
+          <table className="listsTable">
+            <thead>
+              <tr>
+                <th className="leftColumn">List Name</th>
+                <th className="middleColumn">Status</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.state.listNames.map((list, key) => {
+                return (
+                  <tr key={key} className="">
+                    <td
+                      className="leftColumn"
+                      name={this.props.match.params.id}
+                      onClick={this.getList}
+                    >
+                      {list}
+                    </td>
+                    <td
+                      id={`list${key}`}
+                      className="middleColumn"
+                      onLoad={this.getListStatus(
+                        list,
+                        this.props.match.params.id,
+                        `list${key}`
+                      )}
+                    ></td>
+                    <td
+                      name={list}
+                      name2={this.props.match.params.id}
+                      onClick={this.deleteList}
+                      className="list-preview-delete-button"
+                    >
+                      X
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
           </table>
         </div>
       );
     } else {
       return (
-        <div>
-          <p>HELLO {`${this.state.userName.toUpperCase()}`}</p>
-          <div onClick={this.myLists}>Back to my Lists</div>
-          <p>List: {this.state.indListName}</p>
-          <div>
-            Total Picked Cost:
-            <input
-              type="text"
-              className="pickedCost"
-              value={"$" + this.state.totalCost}
-              disabled
-            />
-          </div>
-          <table>
-            <th>Picture</th>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Unit</th>
-            <th>Cost</th>
-            <th>Picked?</th>
-            {this.state.individualList.map((product, key) => {
-              return (
-                <tr key={key}>
-                  <td>
-                    <img src={product.prodPicture} className="pickImg" />
-                  </td>
-                  <td>{product.prodName}</td>
-                  <td>{product.quantity}</td>
-                  <td>{product.unit}</td>
-                  <td>${product.cost}</td>
-                  <td>
-                    <input
-                      type="checkbox"
-                      name={product.id}
-                      onClick={this.updatePick}
-                      checked={product.isPicked ? true : false}
-                    />
-                  </td>
-                </tr>
-              );
-            })}
+        <div className="userContainer">
+          <table className="listHeader">
+            <tr>
+              <td>
+                <p className="greeting">
+                  HELLO {`${this.state.userName.toUpperCase()}`}
+                </p>
+              </td>
+              <td>
+                <center>
+                  <div className="lists-button" onClick={this.myLists}>
+                    Back to my Lists
+                  </div>
+                </center>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td className="middleColumn">Amount Picked</td>
+            </tr>
+            <tr>
+              <td className="greeting">{this.state.indListName}</td>
+              <td className="middleColumn">
+                <input
+                  type="text"
+                  className="pickedCost"
+                  value={"$" + this.state.totalCost}
+                  disabled
+                />
+              </td>
+            </tr>
+          </table>
+          <table className="listsTable">
+            <thead>
+              <tr>
+                <th>Picture</th>
+                <th>Product</th>
+                <th>Qty</th>
+                <th>Unit</th>
+                <th></th>
+                <th>Cost</th>
+                <th>Picked?</th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.state.individualList.map((product, key) => {
+                return (
+                  <tr key={key}>
+                    <td>
+                      <img src={product.prodPicture} className="pickImg" />
+                    </td>
+                    <td>{product.prodName}</td>
+                    <td className="middleColumn">{product.quantity}</td>
+                    <td className="rightColumn">{product.unit}</td>
+                    <td>$</td>
+                    <td className="rightColumn">{product.cost}</td>
+                    <td className="middleColumn">
+                      <input
+                        type="checkbox"
+                        className="checkbox"
+                        name={product.id}
+                        onClick={this.updatePick}
+                        checked={product.isPicked ? true : false}
+                      />
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
           </table>
         </div>
       );

@@ -1,5 +1,96 @@
+.userContainer {
+  margin-left: 10px;
+}
 .pickImg {
   width: 5vw;
   height: 5vh;
   border-radius: 5vw;
+}
+.listsTable {
+  width: 18vw;
+  font-size: 1.5vw;
+  overflow: auto;
+}
+.leftColumn {
+  text-align: start;
+}
+.rightColumn {
+  text-align: end;
+}
+.middleColumn {
+  text-align: center;
+}
+.list-preview-delete-button {
+  border-radius: 50px;
+  background-color: red;
+  color: white;
+  padding: 0.5vw;
+  font-weight: 900;
+  text-align: center;
+  border: 2px solid black;
+}
+.list-preview-delete-button:hover {
+  background-color: rgb(255, 93, 93);
+}
+.greeting {
+  font-size: 2vw;
+}
+.lists-button {
+  border: 5px solid rgb(1, 82, 1);
+  background: rgb(39, 148, 39);
+  padding: 1vw;
+  width: max-content;
+  border-radius: 30px;
+  color: white;
+  font-size: 1vw;
+  font-weight: 900;
+}
+.lists-button:hover {
+  background: rgb(113, 215, 113);
+}
+.checkbox {
+  position: relative;
+  background: white;
+  width: 120px;
+  height: 40px;
+  -webkit-appearance: initial;
+  border-radius: 3px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  outline: none;
+  font-size: 14px;
+  font-family: Trebuchet, Arial, sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  border: 1px solid #ddd;
+}
+
+.checkbox:after {
+  position: absolute;
+  top: 5%;
+  display: block;
+  line-height: 32px;
+  width: 45%;
+  height: 90%;
+  background: #fff;
+  box-sizing: border-box;
+  text-align: center;
+  transition: all 0.3s ease-in 0s;
+  color: black;
+  border: #888 1px solid;
+  border-radius: 3px;
+}
+.checkbox:after {
+  left: 2%;
+  background: rgb(238, 56, 56);
+  content: "NO";
+  color: white;
+}
+.checkbox:checked:after {
+  left: 53%;
+  font-style: italic;
+  background: rgb(18, 176, 18);
+  content: "YES";
+}
+.listHeader {
+  width: 35vw;
 }
