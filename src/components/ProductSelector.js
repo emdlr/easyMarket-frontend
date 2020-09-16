@@ -131,7 +131,6 @@ class ProductSelector extends Component {
       tempObj["pickedStatus"] = "false";
       tempObj["imageURL"] = htmlImageURL.value;
       // Updating preview list total
-      console.log("Updating Total on inserting...");
       this.total += parseFloat(htmlProductCost.value);
       htmlTotal.value = "$" + this.total.toString();
       // Pushing the product object in a temp array
@@ -222,6 +221,7 @@ class ProductSelector extends Component {
       `${this.props.backendUrl}/lists`,
       listArray
     );
+    this.props.clearListName();
   };
 
   render() {

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./Nav.css";
 import Axios from "axios";
 
+// It handles the login, sign up and log out options for a user
 export default class Nav extends Component {
   constructor() {
     super();

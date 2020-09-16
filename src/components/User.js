@@ -132,102 +132,142 @@ export default class User extends Component {
   render() {
     if (!this.state.isIndividual) {
       return (
-        <div className="userContainer">
-          <div className="greeting">
-            HELLO {`${this.state.userName.toUpperCase()}`}
-          </div>
-          <div className="userList">Your Lists</div>
-          <div className="lists-header-cont">
-            <div id="header1" className="listHeaders">
-              List Name
+        <div className="all-user-list-container">
+          <div className="userContainer">
+            <div className="greeting">
+              HELLO {`${this.state.userName.toUpperCase()}`}
             </div>
-            <div id="header2" className="listHeaders">
-              Status
-            </div>
-            <div></div>
-          </div>
-          {this.state.listNames.map((list, key) => {
-            return (
-              <div key={key} className="lists-names-body">
-                <div
-                  className="listData"
-                  name={this.props.match.params.id}
-                  onClick={this.getList}
-                >
-                  {list}
-                </div>
-                <div
-                  id={`list${key}`}
-                  className="listData"
-                  onLoad={this.getListStatus(
-                    list,
-                    this.props.match.params.id,
-                    `list${key}`
-                  )}
-                ></div>
-                <div
-                  name={list}
-                  name2={this.props.match.params.id}
-                  onClick={this.deleteList}
-                  className="list-delete-button"
-                >
-                  X
-                </div>
+            <div className="userList">Your Lists</div>
+            <div className="lists-header-cont">
+              <div id="header1" className="listHeaders">
+                List Name
               </div>
-            );
-          })}
+              <div id="header2" className="listHeaders">
+                Status
+              </div>
+              <div></div>
+            </div>
+            <div className="list-names-container">
+              {this.state.listNames.map((list, key) => {
+                return (
+                  <div key={key} className="lists-names-body">
+                    <div
+                      className="listData"
+                      name={this.props.match.params.id}
+                      onClick={this.getList}
+                    >
+                      {list}
+                    </div>
+                    <div
+                      id={`list${key}`}
+                      className="listData"
+                      onLoad={this.getListStatus(
+                        list,
+                        this.props.match.params.id,
+                        `list${key}`
+                      )}
+                    ></div>
+                    <div
+                      name={list}
+                      name2={this.props.match.params.id}
+                      onClick={this.deleteList}
+                      className="list-delete-button"
+                    >
+                      X
+                    </div>
+                  </div>
+                ); // end return
+              })}
+            </div>
+          </div>
         </div>
       );
     } else {
       return (
-        <div className="userContainer">
-          <div className="listHead">
-            <div className="greeting">
-              HELLO {`${this.state.userName.toUpperCase()}`}
-            </div>
-            <div className="lists-button" onClick={this.myLists}>
-              Back to my Lists
-            </div>
-          </div>
-          <div className="listName">{this.state.indListName}</div>
-          <div className="list-headers-cont">
-            <div className="listHeaders">Picture</div>
-            <div className="listHeaders">Product</div>
-            <div className="listHeaders">Qty</div>
-            <div className="listHeaders">Unit</div>
-            <div></div>
-            <div className="listHeaders">Cost</div>
-            <div className="listHeaders">Picked?</div>
-          </div>
-          {this.state.individualList.map((product, key) => {
-            return (
-              <div className="list-body-cont">
-                <div className="picCol">
-                  <img src={product.prodPicture} className="pickImg" />
-                </div>
-                <div className="prodCol">{product.prodName}</div>
-                <div className="qtyCol">{product.quantity}</div>
-                <div className="unitCol">{product.unit}</div>
-                <div className="dollarCol">$</div>
-                <div className="costCol">{product.cost}</div>
-                <div className="checkCol">
-                  <input
-                    type="checkbox"
-                    className="checkbox"
-                    name={product.id}
-                    onClick={this.updatePick}
-                    checked={product.isPicked ? true : false}
-                  />
-                </div>
+        <div className="all-user-product-list-container">
+          <div className="userContainer">
+            <div className="listHead">
+              <div className="greeting">
+                HELLO {`${this.state.userName.toUpperCase()}`}
               </div>
-            );
-          })}
-          <div className="list-footer">
-            <div>Amount Picked:</div>
-            <div>
+              <div className="lists-button" onClick={this.myLists}>
+                Back to my lists
+              </div>
+            </div>
+            <div className="listName">
+              {"List Name: " + this.state.indListName}
+            </div>
+            <div className="list-headers-cont">
+              <div className="listHeaders">Picture</div>
+              <div className="listHeaders">Product</div>
+              <div className="listHeaders">Qty</div>
+              <div className="listHeaders">Unit</div>
+              <div></div>
+              <div className="listHeaders">Cost</div>
+              <div className="listHeaders">Picked?</div>
+            </div>
+
+            <div className="user-product_container">
+              {this.state.individualList.map((product, key) => {
+                return (
+                  <div key={key} className="list-body-cont">
+                    <div className="picCol">
+                      <img src={product.prodPicture} className="pickImg" />
+                    </div>
+                    {/* <div className="prodCol">{product.prodName}</div> */}
+                    <input
+                      type="text"
+                      value={product.prodName}
+                      className="input-no-border"
+                      disabled={true}
+                    />
+                    {/* <div className="qtyCol">{product.quantity}</div> */}
+                    <input
+                      type="text"
+                      className="qtyCol input-no-border"
+                      value={product.quantity}
+                      disabled={true}
+                    />
+                    {/* <div className="unitCol">{product.unit}</div> */}
+                    <input
+                      type="text"
+                      className="input-no-border"
+                      value={product.unit}
+                      disabled={true}
+                    />
+                    {/* <div className="dollarCol">$</div> */}
+                    <input
+                      type="text"
+                      value="$"
+                      className="input-no-border"
+                      disabled={true}
+                    />
+                    {/* <div className="costCol">{product.cost}</div> */}
+                    <input
+                      type="text"
+                      value={product.cost}
+                      className="costCol input-no-border"
+                      disabled={true}
+                    />
+                    <div className="checkCol">
+                      <input
+                        type="checkbox"
+                        className="checkbox"
+                        name={product.id}
+                        onClick={this.updatePick}
+                        checked={product.isPicked ? true : false}
+                      />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            <div className="list-footer">
+              {/* <div>Amount Picked:</div> */}
+              <p>Amount picked</p>
               <input
                 type="text"
-                className="pickedCost"
+                className="pickedCost input-no-border"
                 value={"$" + this.state.totalCost}
                 disabled
               />

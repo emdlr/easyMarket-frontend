@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import "./ListStore.css";
 import { Link } from "react-router-dom";
 
+// It renders the component to select the store and put a name to the list name
+// It calls the create list react route to proceed with the selection of products
+// and the creation of the preview list
 class ListStore extends Component {
   componentDidMount() {
     this.props.populateStore();
@@ -23,7 +26,6 @@ class ListStore extends Component {
             type="button"
             onClick={() => {
               this.props.getListHeader();
-              // this.props.setView("list-products");
             }}
             disabled={!this.props.listName.length}
           >

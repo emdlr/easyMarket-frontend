@@ -2,6 +2,8 @@ import React from "react";
 import "./Options.css";
 import { Link } from "react-router-dom";
 
+// It displays the options of the application with the routes for each of them
+// At this moment only create list and pick list are functional and the scope
 const Options = (props) => {
   return (
     <div className="options-container">
@@ -24,10 +26,7 @@ const Options = (props) => {
           <img src="/unit.png" alt="" className="option-image-disabled" />
           Units
         </Link>
-        {/* <Link className="option" to="/CreateList">
-          Create list
-        </Link> */}
-        <Link className="option" to="/SelectStore">
+        <Link className="option" to={props.userId ? "/SelectStore" : ""}>
           <img src="/create-list.png" alt="" className="option-image" />
           Create list
         </Link>

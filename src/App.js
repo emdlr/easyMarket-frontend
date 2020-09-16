@@ -29,7 +29,6 @@ class App extends Component {
 
   logings = (user, value) => {
     //emdlr
-    console.log("logins", user, value);
     this.setState({
       isLoggedIn: value,
       userId: user,
@@ -114,40 +113,12 @@ class App extends Component {
     });
   };
 
-  // setView = (view, origin = "list-store") => {
-  //   if (origin === "list-store") {
-  //     this.setState({
-  //       currentView: view,
-  //     });
-  //   } else {
-  //   }
-  // }; // End setView
-
-  // pageView = () => {
-  //   switch (this.state.currentView) {
-  //     case "list-products":
-  //       return (
-  //         <CreateList
-  //           populateCategory={this.populateCategory}
-  //           populateProduct={this.populateProduct}
-  //           listHeader={this.state.listHeader}
-  //           getProductsByStore={this.getProductsByStore}
-  //           productsByStore={this.state.productsByStore}
-  //           userId={this.state.userId}
-  //           backendUrl={backendUrl}
-  //           setView={this.setView}
-  //         />
-  //       );
-  //     default:
-  //       return (
-  //         <ListStore
-  //           populateStore={this.populateStore}
-  //           getListHeader={this.getListHeader}
-  //           setView={this.setView}
-  //         />
-  //       );
-  //   } // end switch
-  // }; // end pageView
+  // METHOD TO CLEAR THE LIST NAME STATE
+  clearListName = () => {
+    this.setState({
+      listName: "",
+    });
+  };
 
   // GET THE STORES AND PRODUCT CATEGORIES FROM DATABASE
   async componentDidMount() {
@@ -155,12 +126,12 @@ class App extends Component {
     this.getStores();
   }
 
+  // Header, Nav and footer are fix in the application
   render() {
     return (
       <div className="App">
-        <Header />
+        <Header clearListName={this.clearListName} />
         <Nav
-          setView={this.setView}
           backendUrl={backendUrl}
           logings={this.logings}
           isLoggedIn={this.state.isLoggedIn}
@@ -175,8 +146,6 @@ class App extends Component {
               getListHeader={this.getListHeader}
               handleCreateListButton={this.handleCreateListButton}
               listName={this.state.listName}
-
-              // setView={this.setView}
             />
           </Route>
           <Route path="/CreateList">
@@ -188,10 +157,9 @@ class App extends Component {
               productsByStore={this.state.productsByStore}
               userId={this.state.userId}
               backendUrl={backendUrl}
-              setView={this.setView}
+              clearListName={this.clearListName}
             />
           </Route>
-          {/* <Route path="/CreateList">{this.pageView()}</Route> */}
           {/*emdlr*/}
           <Route
             path={"/user/:id"}

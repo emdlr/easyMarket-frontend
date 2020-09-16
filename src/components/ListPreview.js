@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "./ListPreview.css";
 
+// It renders the preview list of products every time a product is added or deleted
+// from the preview list state
 class ListPreview extends Component {
   render() {
     const htmlListPreview = this.props.listPreview.map((item, index) => {

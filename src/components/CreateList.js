@@ -23,7 +23,7 @@ const CreateList = (props) => {
           listHeader={props.listHeader}
           userId={props.userId}
           backendUrl={props.backendUrl}
-          setView={props.setView}
+          clearListName={props.clearListName}
         />
       </div>
     </div>
