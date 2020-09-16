@@ -1,68 +1,114 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<img src="https://github.com/emdlr/easymarket-frontend/blob/master/public/favicon.png" alt="easyMarket" width="45" height="45" />
 
-## Available Scripts
+# Easy Market
+---
+**Project Name:** Easy Market App
 
-In the project directory, you can run:
+**Sponsor:** JD
 
-### `npm start`
+**Software Engineer:** _Edgar Martinez & Cesar Treviño_
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Project Definition
+---
+The main purpose of this RESTful application, is to provide the users with a functionality to create their own costumed shopping lists and being able to store them for future use or reference.
+This application will allow you to
+- Assign to your list the store you will be carrying out your shopping
+- Name your lists whatever you like
+- Select your products from a General list that contains all the corresponding information tied to the specific store you selected, such as: Product, category, and Prices
+- Access to all your personalized list’s history and have the option to create a new one or delete it
+- Follow up on your shopping list as you go picking your items and marking them as picked or letting you know about those that are still pending
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+**User Stories**
+---
+![FlowDiagram](https://github.com/emdlr/easymarket-frontend/blob/master/public/user-stories.png)
 
-### `npm test`
+**Project Plan**
+---
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Technology Stack to develop these applications:
 
-### `npm run build`
+ _Back End API_
+- Javascript
+  - Node JS
+    - Express
+    - Axios
+- PostgresSQL Data Base
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+_Front End App_
+- CSS
+- HTML5
+- Javascript
+  - Node JS
+    - React
+    - Axios
+    
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+ _*All documentation will be stored into the easyMarket Project repository setup on GitHub under “emdlr” user account._
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**Project Start Date:** Thrusday September 10th, 2020
 
-### `npm run eject`
+**Deployment Day:** Wednesday September 16th, 2020
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+**Rollout:** Thrusday August 17th, 2020
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+##### Often commits on GitHub will be performed.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+**Project Design**
+---
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+**_Technologies_**
+- *Visual Studio Code* – Main Development Tool
+- *Web Browser* – Google Chrome
+- *Programing language* – Javascript
+- *Style Formats* – Cascading Style Sheets
+- *Web Design Platform* – HTML 5
+- *PG Admin* - Dadabase Manager
+- *Git/GitHub* - Files Repository
+- *Heroku* - Web Server
 
-## Learn More
+**Flow Diagram**
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![FlowDiagram](https://github.com/emdlr/easyMarket-backend/blob/master/documents/flowDiagram.png)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+**Database E-R Diagram**
+---
 
-### Code Splitting
+![DBDiagram](https://github.com/emdlr/easyMarket-backend/blob/master/documents/DBdiagram.png)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+**Wireframes**
+---
 
-### Analyzing the Bundle Size
+**Home**
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+![Home](https://github.com/emdlr/easymarket-frontend/blob/master/public/wf-home.png)
 
-### Making a Progressive Web App
+**Store Selection and List Naming**
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+![Stores](https://github.com/emdlr/easymarket-frontend/blob/master/public/wf-store.png)
 
-### Advanced Configuration
+**Grocery List Creation**
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+![ListSelection](https://github.com/emdlr/easymarket-frontend/blob/master/public/wf-create-list.png)
 
-### Deployment
+**User List Selection/Status/Deletion**
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+![UserList](https://github.com/emdlr/easymarket-frontend/blob/master/public/wf-user-lists.png)
 
-### `npm run build` fails to minify
+**Pick Up List**
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+![PickList](https://github.com/emdlr/easymarket-frontend/blob/master/public/wf-pick-list.png)
+
+
+**What would we add Next**
+---
+
+We would cetainly enable other servicies to let user signing up products and stores. We would also add some other animations to make it more usable for mobile devices.
+
+**Project Repositories**
+- [Front End GitHub Repository](https://github.com/emdlr/easymarket-frontend)
+- [Back End GitHub Repository](https://github.com/emdlr/easyMarket-backend)
+
+**Application Links on Heroku**
+- [LINK](https://pethomeapp.herokuapp.com/) - Cesar's Link
+- [LINK](https://pethomeapp.herokuapp.com/) - Edgar's Link
