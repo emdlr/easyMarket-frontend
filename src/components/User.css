@@ -1,7 +1,6 @@
 .all-user-list-container {
   border: 1px solid black;
   display: flex;
-  /* flex-flow: column nowrap; */
   justify-items: center;
   align-items: flex-start;
   width: 100vw;
@@ -22,7 +21,6 @@
   font-weight: 500;
   text-align: center;
   /* border: 1px solid red; */
-  /* margin-top: 10px; */
 }
 
 .userList {
@@ -38,7 +36,6 @@
   grid-template-columns: 50% 30% 20%;
   grid-template-rows: 100%;
   /* border: 1px solid blue; */
-  /* border-bottom: 1px solid lightgray; */
 }
 
 .listHeaders {
@@ -69,7 +66,6 @@
   grid-template-columns: 50% 30% 20%;
   grid-template-rows: 100%;
   /* border: 1px solid blueviolet; */
-  /* border-bottom: 1px solid lightgray; */
   padding-top: 2px;
 }
 
@@ -99,18 +95,6 @@ a:link {
   width: 35vw;
 }
 .list-delete-button {
-  /* border-radius: 50px;
-  width: 1.5vw;
-  background-color: red;
-  color: white;
-  padding: 0.3vw;
-  font-weight: 900;
-  text-align: center;
-  border: 2px solid black;
-  font-size: 1vw;
-  text-shadow: 2px 3px 3px black;
-  -webkit-box-shadow: 3px 5px 18px 5px rgba(0, 0, 0, 0.7);
-  box-shadow: 3px 5px 5px 0px rgba(0, 0, 0, 0.75); */
   border-radius: 10px;
   background-color: red;
   color: white;
@@ -124,12 +108,12 @@ a:link {
   background-color: rgb(255, 93, 93);
   cursor: default;
 }
+
 /********************/
 
 .all-user-product-list-container {
   /* border: 1px solid black; */
   display: flex;
-  /* flex-flow: column nowrap; */
   justify-items: center;
   align-items: flex-start;
   width: 100vw;
@@ -156,12 +140,8 @@ a:link {
 .lists-button {
   /* border: 1px solid red; */
   font-size: 1vw;
-}
-
-.lists-button:active,
-a:visited,
-a:link {
-  text-decoration: none;
+  text-decoration: underline;
+  color: blue;
 }
 
 .lists-button:hover {
@@ -185,7 +165,6 @@ a:link {
   grid-template-columns: 15% 25% 10% 5% 5% 10% 25%;
   grid-template-rows: 100%;
   /* border: 1px solid blue; */
-  /* border-style: double; */
   border-bottom: 3px double lightgray;
   margin-top: 10px;
 }
