@@ -109,6 +109,6 @@ We would cetainly enable other servicies to let user signing up products and sto
 - [Front End GitHub Repository](https://github.com/emdlr/easymarket-frontend)
 - [Back End GitHub Repository](https://github.com/emdlr/easyMarket-backend)
 
-**Application Links on Heroku**
-- [LINK](https://pethomeapp.herokuapp.com/) - Cesar's Link
-- [LINK](https://pethomeapp.herokuapp.com/) - Edgar's Link
+### APP Heroku Links
+- [LINK](https://easymarket-frontend-ct.herokuapp.com/) - Cesar's Link
+- [LINK](https://easymarket-app.herokuapp.com/) - Edgar's Link
